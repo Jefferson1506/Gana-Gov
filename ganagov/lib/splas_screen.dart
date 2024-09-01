@@ -74,25 +74,29 @@ class _AnimatedTextState extends State<AnimatedText>
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return SlideTransition(
       position: _offsetAnimation,
-      child: const Padding(
-        padding: EdgeInsets.only(top: 10),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 10),
         child: AutoSizeText.rich(
           TextSpan(
             children: [
-              TextSpan(
+              const TextSpan(
                 text: "Gana",
                 style: TextStyle(
-                    fontSize: 20, color: Color.fromARGB(255, 54, 54, 54)),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Color.fromARGB(255, 54, 54, 54)),
               ),
               TextSpan(
-                text: "Gov",
-                style: TextStyle(
+                  text: "Gov",
+                  style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.green),
-              ),
+                    color: colorScheme.primary,
+                  )),
             ],
           ),
           maxLines: 1,

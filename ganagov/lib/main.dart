@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: colorScheme(),
       home: AnimatedSplashScreen(
         duration: 3000,
         splash: const SplashScreenContent(),
@@ -28,4 +29,16 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+}
+
+ThemeData colorScheme() {
+  return ThemeData(
+    useMaterial3: true,
+    colorScheme: ColorScheme.fromSeed(
+        seedColor: const Color.fromARGB(255, 244, 244, 244),
+        primary: const Color.fromARGB(255, 168, 228, 1),
+        secondary: const Color.fromARGB(255, 249, 188, 99),
+        tertiary: const Color.fromARGB(255, 54, 54, 54),
+        surface: Colors.white),
+  );
 }
