@@ -2,6 +2,7 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:ganagov/widgets/img.dart';
 
 class SplashScreenContent extends StatelessWidget {
   const SplashScreenContent({super.key});
@@ -33,13 +34,7 @@ class AnimatedLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width * 3.5,
-        height: MediaQuery.of(context).size.height * 3.5,
-        child: Image.asset("assets/Logo.png", fit: BoxFit.cover),
-      ),
-    );
+    return Center(child: imgLogo(context, 3.5));
   }
 }
 
@@ -84,7 +79,7 @@ class _AnimatedTextState extends State<AnimatedText>
           TextSpan(
             children: [
               const TextSpan(
-                text: "Gana",
+                text: "Gana ",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
