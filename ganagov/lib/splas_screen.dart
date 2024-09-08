@@ -1,8 +1,8 @@
 // ignore_for_file: library_private_types_in_public_api
 
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:ganagov/widgets/img.dart';
+import 'package:ganagov/widgets/text_span.dart';
 
 class SplashScreenContent extends StatelessWidget {
   const SplashScreenContent({super.key});
@@ -72,34 +72,14 @@ class _AnimatedTextState extends State<AnimatedText>
     final colorScheme = Theme.of(context).colorScheme;
 
     return SlideTransition(
-      position: _offsetAnimation,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 10),
-        child: AutoSizeText.rich(
-          TextSpan(
-            children: [
-              const TextSpan(
-                text: "Gana ",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Color.fromARGB(255, 54, 54, 54)),
-              ),
-              TextSpan(
-                  text: "Gov",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: colorScheme.primary,
-                  )),
-            ],
-          ),
-          maxLines: 1,
-          minFontSize: 18,
-          overflow: TextOverflow.ellipsis,
-        ),
-      ),
-    );
+        position: _offsetAnimation,
+        child: CustomTextSpan(
+            primary: const Color.fromARGB(255, 54, 54, 54),
+            secondary: colorScheme.primary,
+            textPrimary: "Gana",
+            textSecondary: "Gov",
+            sizePrimary: 20,
+            sizeSecondary: 20));
   }
 
   @override
