@@ -2,10 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:ganagov/config/routes.dart';
 import 'package:ganagov/module/login/home_screen.dart';
-import 'package:ganagov/module/login/login.dart';
 import 'package:ganagov/splas_screen.dart';
-import 'package:ganagov/widgets/backgraound.dart';
 import 'package:page_transition/page_transition.dart';
 
 void main() {
@@ -19,11 +18,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      routes: routes,
       theme: colorScheme(),
       home: AnimatedSplashScreen(
         duration: 3000,
         splash: const SplashScreenContent(),
-        nextScreen: Login(),
+        nextScreen: const HomeScreen(),
         splashTransition: SplashTransition.sizeTransition,
         pageTransitionType: PageTransitionType.fade,
         backgroundColor: Colors.white,

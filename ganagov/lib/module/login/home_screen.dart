@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
             origin: context,
             text: "Soy Vendedor",
             color: color.primary,
-            onpress: () {},
+            onpress: () => Navigator.pushNamed(context, "login"),
           ),
           SizedBox(
             height: MediaQuery.sizeOf(context).height * 0.04,
@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
             origin: context,
             text: "Soy Comprador",
             color: color.secondary,
-            onpress: () {},
+            onpress: () => Navigator.pushNamed(context, "home_buyer"),
           )
         ],
       ),

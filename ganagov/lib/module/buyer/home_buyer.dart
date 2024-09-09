@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class RecoverPassword extends StatelessWidget {
-  const RecoverPassword({super.key});
+class HomeBuyer extends StatelessWidget {
+  const HomeBuyer({super.key});
 
   @override
   Widget build(BuildContext context) {
