@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "587281289420",
+    "project_id": "ganagov-34322",
+    "storage_bucket": "ganagov-34322.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587281289420:android:238583de3b93b67ddbf269",
+        "android_client_info": {
+          "package_name": "com.ganagov.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4nnszdAmab33Wlof8HMKrcYa7ONDDkcs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
