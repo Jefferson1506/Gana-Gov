@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:ganagov/provider/login_provider.dart';
+import 'package:ganagov/module/login/provider/login_provider.dart';
 import 'package:ganagov/widgets/backgraound.dart';
 import 'package:ganagov/widgets/img.dart';
 import 'package:ganagov/widgets/text_form.dart';
@@ -95,7 +95,8 @@ class Login extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Center(
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () =>
+                              Navigator.pushNamed(context, "recover"),
                           child: AutoSizeText(
                             "Olvidaste tu contraseña?",
                             style: TextStyle(
