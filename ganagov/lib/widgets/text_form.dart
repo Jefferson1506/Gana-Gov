@@ -11,6 +11,7 @@ class CustomTextForm extends StatelessWidget {
   final Color borderColor;
   final double borderRadius;
   final bool isPassword;
+  final double sizeText;
 
   const CustomTextForm({
     super.key,
@@ -24,6 +25,7 @@ class CustomTextForm extends StatelessWidget {
     this.borderRadius = 10.0,
     this.isPassword = false,
     this.iconColor = const Color.fromARGB(255, 249, 188, 99),
+    this.sizeText = 16,
   });
 
   @override
@@ -36,6 +38,7 @@ class CustomTextForm extends StatelessWidget {
         validator: validator,
         obscureText: isPassword,
         decoration: InputDecoration(
+          hintStyle: TextStyle(fontSize: sizeText),
           hintText: hintText,
           filled: true,
           fillColor: fillColor,

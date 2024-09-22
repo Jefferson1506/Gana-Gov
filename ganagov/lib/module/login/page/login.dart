@@ -36,12 +36,12 @@ class Login extends StatelessWidget {
                     logo(context),
                     CustomTextForm(
                       controller: provider.userController,
-                      hintText: "Correo electrónico",
+                      hintText: "Usuario",
                       keyboardType: TextInputType.emailAddress,
                       prefixIcon: Icons.people_alt,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Por favor ingresa tu correo / usuario';
+                          return 'Por favor ingresa su usuario';
                         }
                         return null;
                       },
@@ -52,6 +52,7 @@ class Login extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: TextFormField(
+                        controller: provider.passwordController,
                         obscureText: provider.obscureText,
                         obscuringCharacter: "*",
                         keyboardType: TextInputType.emailAddress,
@@ -100,7 +101,7 @@ class Login extends StatelessWidget {
                           child: AutoSizeText(
                             "Olvidaste tu contraseña?",
                             style: TextStyle(
-                                fontSize: 15, color: colorScheme.primary),
+                                fontSize: 16, color: colorScheme.primary),
                           ),
                         ),
                       ),
@@ -112,7 +113,7 @@ class Login extends StatelessWidget {
                       width: MediaQuery.sizeOf(context).width * 0.9,
                       height: size * 0.08,
                       child: ElevatedButton(
-                          onPressed: provider.submit,
+                          onPressed: () => provider.submit(context),
                           child: const AutoSizeText(
                             "Ingresar",
                             style: TextStyle(color: Colors.white, fontSize: 17),
@@ -122,32 +123,14 @@ class Login extends StatelessWidget {
                       height: size * 0.04,
                     ),
                     InkWell(
-                      onTap: () {},
-                      child: AutoSizeText.rich(
-                        TextSpan(
-                          children: [
-                            const TextSpan(
-                              text: "A un no tienes cuenta?  ",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                                color: Color.fromARGB(255, 54, 54, 54),
-                              ),
-                            ),
-                            TextSpan(
-                              text: "Registrate",
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: colorScheme.primary,
-                              ),
-                            ),
-                          ],
-                        ),
-                        textAlign: TextAlign.center,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                      onTap: () => Navigator.pushNamed(context, "new_user"),
+                      child: CustomTextSpan(
+                          primary: const Color.fromARGB(255, 54, 54, 54),
+                          secondary: colorScheme.primary,
+                          textPrimary: "A un no tienes cuenta?  ",
+                          textSecondary: "Registrate",
+                          sizePrimary: 14,
+                          sizeSecondary: 14),
                     ),
                     SizedBox(
                       height: size * 0.04,

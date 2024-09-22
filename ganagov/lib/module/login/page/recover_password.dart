@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:ganagov/module/login/provider/recover_provaider.dart';
-import 'package:ganagov/module/login/widgets/text_form.dart';
-import 'package:ganagov/module/login/widgets/text_span.dart';
+import 'package:ganagov/widgets/text_form.dart';
+import 'package:ganagov/widgets/text_span.dart';
 import 'package:provider/provider.dart';
 
 class RecoverPassword extends StatelessWidget {
@@ -28,8 +28,8 @@ class RecoverPassword extends StatelessWidget {
                 secondary: colorScheme.primary,
                 textPrimary: "Gana",
                 textSecondary: "Gov",
-                sizePrimary: 35,
-                sizeSecondary: 35,
+                sizePrimary: 27,
+                sizeSecondary: 27,
               ),
               SizedBox(
                 width: width * 0.03,

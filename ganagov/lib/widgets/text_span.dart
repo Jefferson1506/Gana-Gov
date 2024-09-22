@@ -28,13 +28,13 @@ class CustomTextSpan extends StatelessWidget {
                 text: textPrimary,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 20,
+                  fontSize: sizePrimary,
                   color: primary,
                 )),
             TextSpan(
                 text: textSecondary,
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: sizeSecondary,
                   fontWeight: FontWeight.bold,
                   color: secondary,
                 )),
