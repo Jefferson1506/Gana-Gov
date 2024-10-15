@@ -60,15 +60,6 @@ class NotifyDialog {
           onPressed: () {
             Navigator.pop(context);
           },
-          text: 'Cancelar',
-          iconData: Icons.cancel,
-          color: Colors.grey,
-          textStyle: const TextStyle(color: Colors.white),
-        ),
-        IconsButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
           text: 'Continuar',
           iconData: Icons.warning,
           color: Colors.orange,

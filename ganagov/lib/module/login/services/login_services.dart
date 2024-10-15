@@ -19,19 +19,14 @@ Future<String?> verifyUserCredentials(
       (user) => user.username == username,
     );
 
-    print(foundUser.username + " " + foundUser.password);
-    
-    print(username + " " + password);
-
     if (foundUser.password == password) {
-      NotifyDialog.showSuccessDialog(context);
       return foundUser.role;
     } else {
       NotifyDialog.showErrorDialog(context, "Contraseña incorrecta");
     }
   } catch (e) {
-    NotifyDialog.showErrorDialog(
-        context, 'Error al verificar credenciales: $e');
+    NotifyDialog.showWarningDialog(
+        context, 'Error al verificar credenciales : \n$e');
   }
 
   return null;

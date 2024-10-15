@@ -15,7 +15,7 @@ class RecoverPassword extends StatelessWidget {
     final width = MediaQuery.sizeOf(context).width;
 
     return ChangeNotifierProvider(
-      create: (context) => RecoverProvaider(),
+      create: (context) => RecoverProvider(),
       child: Scaffold(
           appBar: AppBar(
             toolbarHeight: height * 0.1,
@@ -36,7 +36,7 @@ class RecoverPassword extends StatelessWidget {
               ),
             ],
           ),
-          body: Consumer<RecoverProvaider>(builder: (context, provider, child) {
+          body: Consumer<RecoverProvider>(builder: (context, provider, child) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -84,7 +84,7 @@ class RecoverPassword extends StatelessWidget {
                             SizedBox(height: height * 0.03),
                             CustomTextForm(
                               controller: provider.email,
-                              hintText: "Usuario :",
+                              hintText: "Correo :",
                               keyboardType: TextInputType.emailAddress,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
@@ -95,7 +95,7 @@ class RecoverPassword extends StatelessWidget {
                             ),
                             SizedBox(height: height * 0.04),
                             ElevatedButton(
-                              onPressed: () => provider.visibilityWidget(),
+                              onPressed: () => provider.changePassword(context),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: colorScheme.primary,
                                 shape: RoundedRectangleBorder(
@@ -112,7 +112,6 @@ class RecoverPassword extends StatelessWidget {
                       ),
                     ),
                   ),
-                  //CONTRASEÑA
                   Visibility(
                     visible: provider.visibilyPassword,
                     child: Form(
@@ -132,7 +131,7 @@ class RecoverPassword extends StatelessWidget {
                             ),
                           ],
                         ),
-                        child: Column(
+                        child: ListView(
                           children: [
                             AutoSizeText(
                               'Nueva contraseña',
@@ -161,6 +160,8 @@ class RecoverPassword extends StatelessWidget {
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Por favor el campo es obligatorio';
+                                } else if (value.length <= 3) {
+                                  return 'Contraseña invalida';
                                 }
                                 return null;
                               },
@@ -182,9 +183,9 @@ class RecoverPassword extends StatelessWidget {
                                 return null;
                               },
                             ),
-                            SizedBox(height: height * 0.06),
+                            SizedBox(height: height * 0.03),
                             ElevatedButton(
-                              onPressed: () => provider.visibilityWidget(),
+                              onPressed: () => provider.updatePassword(context),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: colorScheme.secondary,
                                 shape: RoundedRectangleBorder(
