@@ -1,8 +1,8 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:ganagov/widgets/img.dart';
-import 'package:ganagov/widgets/text_span.dart';
+import 'package:ganagov/global/widgets/img.dart';
+import 'package:ganagov/global/widgets/text_span.dart';
 
 class SplashScreenContent extends StatelessWidget {
   const SplashScreenContent({super.key});

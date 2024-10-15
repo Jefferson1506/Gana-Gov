@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ganagov/module/login/provider/new_user_provider.dart';
-import 'package:ganagov/widgets/backgraound.dart';
-import 'package:ganagov/widgets/text.dart';
-import 'package:ganagov/widgets/text_form.dart';
-import 'package:ganagov/widgets/text_span.dart';
+import 'package:ganagov/global/widgets/backgraound.dart';
+import 'package:ganagov/global/widgets/text.dart';
+import 'package:ganagov/global/widgets/text_form.dart';
+import 'package:ganagov/global/widgets/text_span.dart';
 import 'package:provider/provider.dart';
 
 class NewUser extends StatelessWidget {

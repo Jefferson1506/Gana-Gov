@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:ganagov/global/widget.dart';
-import 'package:ganagov/module/login/model/user.dart';
+import 'package:ganagov/global/widgets/notify_dialog.dart';
+import 'package:ganagov/global/user.dart';
+
+import '../../../global/widgets/loanding.dart';
 
 Future<String?> verifyUserCredentials(
     String username, String password, BuildContext context) async {

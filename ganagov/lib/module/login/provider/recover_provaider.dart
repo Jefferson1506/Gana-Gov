@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:ganagov/global/widget.dart';
+import 'package:ganagov/global/widgets/loanding.dart';
 
 class RecoverProvider extends ChangeNotifier {
   bool visibilyUser = true;

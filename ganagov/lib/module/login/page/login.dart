@@ -1,10 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:ganagov/module/login/provider/login_provider.dart';
-import 'package:ganagov/widgets/backgraound.dart';
-import 'package:ganagov/widgets/img.dart';
-import 'package:ganagov/widgets/text_form.dart';
-import 'package:ganagov/widgets/text_span.dart';
+import 'package:ganagov/global/widgets/backgraound.dart';
+import 'package:ganagov/global/widgets/img.dart';
+import 'package:ganagov/global/widgets/text_form.dart';
+import 'package:ganagov/global/widgets/text_span.dart';
 import 'package:provider/provider.dart';
 
 class Login extends StatelessWidget {

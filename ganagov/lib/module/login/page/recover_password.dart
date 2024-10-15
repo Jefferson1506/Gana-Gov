@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:ganagov/module/login/provider/recover_provaider.dart';
-import 'package:ganagov/widgets/text_form.dart';
-import 'package:ganagov/widgets/text_span.dart';
+import 'package:ganagov/global/widgets/text_form.dart';
+import 'package:ganagov/global/widgets/text_span.dart';
 import 'package:provider/provider.dart';
 
 class RecoverPassword extends StatelessWidget {

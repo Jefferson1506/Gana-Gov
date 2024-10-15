@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ganagov/widgets/backgraound.dart';
-import 'package:ganagov/widgets/button.dart';
+import 'package:ganagov/global/widgets/backgraound.dart';
+import 'package:ganagov/global/widgets/button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
