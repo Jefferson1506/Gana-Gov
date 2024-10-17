@@ -13,9 +13,9 @@ class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
     required this.text,
-    this.sizeWidth = 0.9,  // Ancho del botón en proporción a la pantalla
-    this.sizeHeight = 0.08, // Alto del botón en proporción a la pantalla
-    this.sizeText = 17, // Tamaño de texto
+    this.sizeWidth = 0.9,  
+    this.sizeHeight = 0.08,
+    this.sizeText = 17, 
     required this.color,
     this.colorText = Colors.white,
     required this.origin,
