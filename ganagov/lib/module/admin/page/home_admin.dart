@@ -1,10 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
+import 'package:flutter/services.dart';
 import 'package:ganagov/module/admin/page/Breed.dart';
 import 'package:ganagov/module/admin/page/new_admin.dart';
 import 'package:ganagov/module/admin/statistics.dart';
 import 'package:ganagov/module/admin/page/user_control_page.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({super.key});
@@ -26,17 +28,31 @@ class _AdminHomePageState extends State<AdminHomePage> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+
+    Future<void> logout(BuildContext context) async {
+      var box = await Hive.openBox('users');
+      await box.clear();
+
+      Navigator.pushReplacementNamed(context, 'login');
+    }
+
+    void exitApp() {
+      SystemNavigator.pop();
+    }
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 39, 48, 39),
       appBar: AppBar(
-        shape: LinearBorder.bottom(side: BorderSide(color: colorScheme.secondary,width: 10)),
+        shape: LinearBorder.bottom(
+            side: const BorderSide(color: Colors.white, width: 10)),
         toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
         leading: IconButton(
-            onPressed: () => Navigator.pop,
-            icon: const Icon(
-              Icons.arrow_back_ios_outlined,
-              color: Colors.white,
-            )),
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(
+            Icons.arrow_back_ios_outlined,
+            color: Colors.white,
+          ),
+        ),
         title: const AutoSizeText(
           'Administrador',
           minFontSize: 18,

@@ -23,7 +23,7 @@ Future<String?> verifyUserCredentials(
     );
 
     if (foundUser.password == password) {
-      if (foundUser.estado == 'SI') {
+      if (foundUser.estado!.contains('SI')) {
         final userBox = Hive.box<UserModel>('users');
         await userBox.put(username, foundUser);
 

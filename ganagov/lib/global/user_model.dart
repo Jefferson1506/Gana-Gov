@@ -56,7 +56,7 @@ class UserModel {
       username: data['User'],
       password: data['clave'],
       role: data['rol'],
-      estado: data['estado'],
+      estado: data['Estado'],
       correo: data['correo'],
       fecha: data['fecha'],
       idNumber: data['idNumber'],
