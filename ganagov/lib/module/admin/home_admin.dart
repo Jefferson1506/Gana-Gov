@@ -17,7 +17,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    const UserControlPage(),
+    const UserManagementPage(),
     const StatisticsPage(),
     const BreedCrudPage(),
     const NewAdmin()

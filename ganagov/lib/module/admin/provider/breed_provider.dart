@@ -14,7 +14,8 @@ class BreedProvider with ChangeNotifier {
 
   Future<void> fetchBreeds() async {
     try {
-      final snapshot = await FirebaseFirestore.instance.collection('Breeds').get();
+      final snapshot =
+          await FirebaseFirestore.instance.collection('Breeds').get();
       _breeds = snapshot.docs;
       notifyListeners();
     } catch (e) {
@@ -22,12 +23,14 @@ class BreedProvider with ChangeNotifier {
     }
   }
 
-  Future<void> addBreed(BuildContext context, String name, String description) async {
+  Future<void> addBreed(
+      BuildContext context, String name, String description) async {
     LoadingDialog.showLoadingDialog(context);
-    
+
     if (name.isEmpty || description.isEmpty) {
       LoadingDialog.dismissLoadingDialog(context);
-      NotifyDialog.showWarningDialog(context, "Todos los campos son obligatorios.");
+      NotifyDialog.showWarningDialog(
+          context, "Todos los campos son obligatorios.");
       return;
     }
 
@@ -36,23 +39,26 @@ class BreedProvider with ChangeNotifier {
         'name': name,
         'description': description,
       });
-      
+
       LoadingDialog.dismissLoadingDialog(context);
       NotifyDialog.showSuccessDialog(context);
 
       await fetchBreeds();
     } catch (error) {
       LoadingDialog.dismissLoadingDialog(context);
-      NotifyDialog.showErrorDialog(context, "Error al agregar la raza: ${error.toString()}");
+      NotifyDialog.showErrorDialog(
+          context, "Error al agregar la raza: ${error.toString()}");
     }
   }
 
-  Future<void> editBreed(BuildContext context, String id, String name, String description) async {
+  Future<void> editBreed(
+      BuildContext context, String id, String name, String description) async {
     LoadingDialog.showLoadingDialog(context);
 
     if (name.isEmpty || description.isEmpty) {
       LoadingDialog.dismissLoadingDialog(context);
-      NotifyDialog.showWarningDialog(context, "Todos los campos son obligatorios.");
+      NotifyDialog.showWarningDialog(
+          context, "Todos los campos son obligatorios.");
       return;
     }
 
@@ -61,14 +67,15 @@ class BreedProvider with ChangeNotifier {
         'name': name,
         'description': description,
       });
-      
+
       LoadingDialog.dismissLoadingDialog(context);
       NotifyDialog.showSuccessDialog(context);
 
       await fetchBreeds();
     } catch (error) {
       LoadingDialog.dismissLoadingDialog(context);
-      NotifyDialog.showErrorDialog(context, "Error al editar la raza: ${error.toString()}");
+      NotifyDialog.showErrorDialog(
+          context, "Error al editar la raza: ${error.toString()}");
     }
   }
 
@@ -77,14 +84,15 @@ class BreedProvider with ChangeNotifier {
 
     try {
       await FirebaseFirestore.instance.collection('Breeds').doc(id).delete();
-      
+
       LoadingDialog.dismissLoadingDialog(context);
       NotifyDialog.showSuccessDialog(context);
 
       await fetchBreeds();
     } catch (error) {
       LoadingDialog.dismissLoadingDialog(context);
-      NotifyDialog.showErrorDialog(context, "Error al eliminar la raza: ${error.toString()}");
+      NotifyDialog.showErrorDialog(
+          context, "Error al eliminar la raza: ${error.toString()}");
     }
   }
 }
