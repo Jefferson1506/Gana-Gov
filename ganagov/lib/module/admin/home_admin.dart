@@ -29,6 +29,8 @@ class _AdminHomePageState extends State<AdminHomePage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 39, 48, 39),
       appBar: AppBar(
+        shape: LinearBorder.bottom(side: BorderSide(color: colorScheme.secondary,width: 10)),
+        toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
         leading: IconButton(
             onPressed: () => Navigator.pop,
             icon: const Icon(
