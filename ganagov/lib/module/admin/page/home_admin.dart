@@ -1,10 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
-import 'package:ganagov/module/admin/Breed.dart';
-import 'package:ganagov/module/admin/new_admin.dart';
+import 'package:ganagov/module/admin/page/Breed.dart';
+import 'package:ganagov/module/admin/page/new_admin.dart';
 import 'package:ganagov/module/admin/statistics.dart';
-import 'package:ganagov/module/admin/user_control_page.dart';
+import 'package:ganagov/module/admin/page/user_control_page.dart';
 
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({super.key});

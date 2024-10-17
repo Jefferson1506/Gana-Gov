@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:ganagov/module/admin/provider/user_provider.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +42,7 @@ class UserListWithFilter extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: TextField(
                 decoration: const InputDecoration(
-                  labelStyle:TextStyle(color: Colors.white),
+                  labelStyle: TextStyle(color: Colors.white),
                   labelText: 'Buscar por nombre',
                   prefixIcon: Icon(Icons.search),
                 ),
@@ -60,23 +61,30 @@ class UserListWithFilter extends StatelessWidget {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ListTile(
-                          tileColor: Colors.white,
-                          textColor: Colors.black,
+                          tileColor: user['Estado'] =='SI'?Colors.green:Colors.grey,
+                          textColor: Colors.white,
                           shape: const RoundedRectangleBorder(
                               side: BorderSide(
                                   color: Color.fromARGB(255, 249, 188, 99),
                                   width: 2.5),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20))),
-                          title: Text(user['User'] ?? 'Sin nombre'),
-                          subtitle: Text(user['correo'] ?? 'Sin correo'),
+                          title: AutoSizeText(
+                            'Nombre :${user['nombre'] ?? '---'}  Usuario :${user['User']}',
+                            maxFontSize: 15,
+                          ),
+                          subtitle: AutoSizeText(
+                            'Correo:${user['correo']} - Estado:${user['Estado']} - Rol:${user['rol']}  ',
+                            maxFontSize: 15,
+                          ),
                           trailing: IconButton(
                             icon: const Icon(Icons.delete, color: Colors.red),
                             onPressed: () {
                               provider.deleteUser(user['id']);
                             },
                           ),
-                          onTap: () => _showUpdateDialog(context, provider, user),
+                          onTap: () =>
+                              _showUpdateDialog(context, provider, user),
                         ),
                       );
                     },
