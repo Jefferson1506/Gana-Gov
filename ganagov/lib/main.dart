@@ -5,15 +5,24 @@ import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:ganagov/global/routes.dart';
 import 'package:ganagov/firebase_options.dart';
+import 'package:ganagov/global/user_model.dart';
 import 'package:ganagov/module/login/page/home_screen.dart';
 import 'package:ganagov/splas_screen.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:page_transition/page_transition.dart';
 
 void main() async {
+  
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+ await Hive.initFlutter();
+  Hive.registerAdapter(UserModelAdapter());
+
+  
+  await Hive.openBox<UserModel>('users');
 
   runApp(const MyApp());
 }
