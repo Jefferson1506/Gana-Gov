@@ -14,5 +14,5 @@ Map<String, Widget Function(BuildContext)> routes = {
   "recover": (_) => const RecoverPassword(),
   "home_buyer": (_) => const HomeBuyer(),
   "home_seller": (_) => const HomeSeller(),
-  "home_admin": (_) => const HomeAdmin(),
+  "home_admin": (_) => const AdminHomePage(),
 };
