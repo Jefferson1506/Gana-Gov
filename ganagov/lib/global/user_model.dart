@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 part 'user_model.g.dart';
 
 @HiveType(typeId: 0)
-class UserModel {
+class UserModel extends HiveObject{
   @HiveField(0)
   final String? username;
 
@@ -37,7 +37,10 @@ class UserModel {
   @HiveField(10)
   final String? telefono;
 
-  UserModel({
+  @HiveField(11)
+  final bool? superAdmin;
+
+  UserModel(  {
     this.username,
     this.password,
     this.role,
@@ -49,6 +52,7 @@ class UserModel {
     this.nombre,
     this.sexo,
     this.telefono,
+    this.superAdmin,
   });
 
   factory UserModel.fromMap(Map<String, dynamic> data) {
@@ -64,6 +68,7 @@ class UserModel {
       nombre: data['nombre'],
       sexo: data['sexo'],
       telefono: data['telefono'],
+      superAdmin:data['superAdmin'] ?? false
     );
   }
 }

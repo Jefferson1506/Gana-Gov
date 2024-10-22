@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
 import 'package:flutter/services.dart';
+import 'package:ganagov/global/user_model.dart';
 import 'package:ganagov/module/admin/page/Breed.dart';
 import 'package:ganagov/module/admin/page/new_admin.dart';
 import 'package:ganagov/module/admin/statistics.dart';
@@ -28,17 +29,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-
-    Future<void> logout(BuildContext context) async {
-      var box = await Hive.openBox('users');
-      await box.clear();
-
-      Navigator.pushReplacementNamed(context, 'login');
-    }
-
-    void exitApp() {
-      SystemNavigator.pop();
-    }
+    final statusAdmi = statusAdminh();
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 39, 48, 39),
@@ -64,20 +55,21 @@ class _AdminHomePageState extends State<AdminHomePage> {
       ),
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomBarInspiredInside(
-        items: const [
-          TabItem(
+        items:  [
+          const TabItem(
             icon: Icons.person,
             title: 'Control Usuarios',
           ),
-          TabItem(
+          const TabItem(
             icon: Icons.bar_chart,
             title: 'Estadísticas',
           ),
-          TabItem(
+          const TabItem(
             icon: Icons.pets,
             title: 'CRUD Razas',
           ),
-          TabItem(
+          if(statusAdmi == true)
+          const TabItem(
             icon: Icons.settings,
             title: 'Admin',
           ),
@@ -95,4 +87,21 @@ class _AdminHomePageState extends State<AdminHomePage> {
       ),
     );
   }
+}
+
+Future<void> logout(BuildContext context) async {
+  var box = await Hive.openBox('users');
+  await box.clear();
+
+  Navigator.pushReplacementNamed(context, 'login');
+}
+
+Future<bool> statusAdminh() async {
+  final box = await Hive.openBox('users');
+  final a = box.values as UserModel;
+  return a.superAdmin!;
+}
+
+void exitApp() {
+  SystemNavigator.pop();
 }
