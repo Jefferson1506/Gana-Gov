@@ -1,6 +1,7 @@
 import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:ganagov/module/buyer/page/perfil_buyer.dart';
+import 'package:ganagov/module/buyer/page/sell.dart';
 
 class HomeBuyer extends StatefulWidget {
   const HomeBuyer({super.key});
@@ -12,7 +13,7 @@ class HomeBuyer extends StatefulWidget {
 class _HomeBuyerState extends State<HomeBuyer> {
   int _currentIndex = 0;
 
-  final List<Widget> _pages = [const PerfilBuyer()];
+  final List<Widget> _pages = [const PerfilBuyer(), RegistroGanadoPage()];
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +35,8 @@ class _HomeBuyerState extends State<HomeBuyer> {
             title: 'Ventas',
           ),
         ],
-        backgroundColor: colorScheme.secondary,
-        color: const Color.fromARGB(255, 39, 48, 39),
+        backgroundColor: colorScheme.primary,
+        color: const Color.fromARGB(255, 255, 255, 255),
         colorSelected: Colors.orange,
         indexSelected: _currentIndex,
         onTap: (int index) {

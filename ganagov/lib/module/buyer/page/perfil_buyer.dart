@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ganagov/global/user_model.dart';
-import 'package:ganagov/global/widgets/button.dart';
+import 'package:ganagov/global/widgets/backgraound.dart';
 import 'package:ganagov/global/widgets/loanding.dart';
+import 'package:ganagov/global/widgets/notify_dialog.dart';
 import 'package:ganagov/global/widgets/text_form.dart';
 import 'package:ganagov/module/admin/page/home_admin.dart';
 import 'package:hive/hive.dart';
@@ -70,15 +71,14 @@ class _PerfilBuyerState extends State<PerfilBuyer> {
       if (querySnapshot.docs.isNotEmpty) {
         return querySnapshot.docs.first.id;
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Usuario no encontrado")),
-        );
+        NotifyDialog.showWarningDialog(context, "Usuario no encontrado");
+
         return null;
       }
     } catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Error al buscar el usuario: $error")),
-      );
+      NotifyDialog.showErrorDialog(
+          context, "Error al buscar el usuario: $error");
+
       return null;
     }
   }
@@ -127,27 +127,14 @@ class _PerfilBuyerState extends State<PerfilBuyer> {
             await _userBox!.add(_userModel!);
           }
 
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-                backgroundColor: Colors.yellow,
-                content: Text(
-                  "Datos del usuario actualizados.",
-                  style: TextStyle(color: Colors.black),
-                )),
-          );
+          NotifyDialog.showSuccessDialog(context);
         } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-                backgroundColor: Colors.red,
-                content: Text("Error al actualizar datos: $e")),
-          );
+          NotifyDialog.showErrorDialog(
+              context, "Error al actualizar datos: $e");
         }
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              backgroundColor: Colors.grey,
-              content: Text("El usuario no existe en la base de datos.")),
-        );
+        NotifyDialog.showErrorDialog(
+            context, "El usuario no existe en la base de datos.");
       }
     }
 
@@ -176,17 +163,20 @@ class _PerfilBuyerState extends State<PerfilBuyer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        shape: const UnderlineInputBorder(
+          borderSide:
+              BorderSide(color: Color.fromARGB(255, 17, 163, 3), width: 5),
+        ),
+        toolbarHeight: MediaQuery.sizeOf(context).height * 0.1,
         title: const AutoSizeText(
           "Perfil de Usuario",
-          style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: const Color.fromARGB(255, 17, 163, 3),
         actions: [
           IconButton(
               onPressed: () => logout(context),
               icon: const Icon(
                 Icons.people,
-                color: Colors.cyanAccent,
+                color: Colors.red,
               )),
           IconButton(
               onPressed: () => exitApp(),
@@ -198,96 +188,107 @@ class _PerfilBuyerState extends State<PerfilBuyer> {
       ),
       body: _userModel == null
           ? const Center(child: CircularProgressIndicator())
-          : Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ListView(
-                children: [
-                  _buildCircleAvatar(),
-                  SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-                  Padding(
-                    padding: const EdgeInsets.all(13.0),
-                    child: Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(10))),
-                        height: MediaQuery.sizeOf(context).height * 0.07,
-                        width: MediaQuery.sizeOf(context).width * 0.03,
-                        child: AutoSizeText(
-                            maxFontSize: 19,
-                            minFontSize: 17,
-                            textAlign: TextAlign.center,
-                            '${_idTypeController.text.toString()} - ${_idNumberController.text.toString()}')),
-                  ),
-                  CustomTextForm(
-                    iconColor: Colors.black,
-                    controller: _nombreController,
-                    hintText: 'Nombre',
-                    prefixIcon: Icons.person,
-                    validator: (value) =>
-                        value!.isEmpty ? 'El nombre es requerido' : null,
-                  ),
-                  SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-                  CustomTextForm(
-                    iconColor: Colors.black,
-                    controller: _usernameController,
-                    hintText: 'Usuario',
-                    prefixIcon: Icons.account_circle,
-                    validator: (value) =>
-                        value!.isEmpty ? 'El usuario es requerido' : null,
-                  ),
-                  SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-                  CustomTextForm(
-                    iconColor: Colors.black,
-                    controller: _emailController,
-                    hintText: 'Correo',
-                    prefixIcon: Icons.email,
-                    validator: (value) =>
-                        value!.isEmpty ? 'El correo es requerido' : null,
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                  SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-                  CustomTextForm(
-                    iconColor: Colors.black,
-                    controller: _fechaController,
-                    hintText: 'Fecha de Registro',
-                    prefixIcon: Icons.calendar_today,
-                    validator: (value) =>
-                        value!.isEmpty ? 'La fecha es requerida' : null,
-                    keyboardType: TextInputType.datetime,
-                  ),
-                  SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-                  CustomTextForm(
-                    iconColor: Colors.black,
-                    controller: _sexoController,
-                    hintText: 'Sexo',
-                    prefixIcon: Icons.person_outline,
-                    validator: (value) =>
-                        value!.isEmpty ? 'El sexo es requerido' : null,
-                  ),
-                  SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-                  CustomTextForm(
-                    iconColor: Colors.black,
-                    controller: _telefonoController,
-                    hintText: 'Teléfono',
-                    prefixIcon: Icons.phone,
-                    validator: (value) =>
-                        value!.isEmpty ? 'El teléfono es requerido' : null,
-                    keyboardType: TextInputType.phone,
-                  ),
-                  SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-                  CustomButton(
-                    text: 'Guardar Cambios',
-                    color: const Color.fromARGB(255, 17, 163, 3),
-                    origin: context,
-                    onpress: () async {
-                      await updateUserData(context);
-                    },
-                  )
-                ],
+          : Stack(children: [
+              backgroundAfternoon(context),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: ListView(
+                  children: [
+                    _buildCircleAvatar(),
+                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                    Padding(
+                      padding: const EdgeInsets.all(13.0),
+                      child: Container(
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10))),
+                          height: MediaQuery.sizeOf(context).height * 0.07,
+                          width: MediaQuery.sizeOf(context).width * 0.03,
+                          child: AutoSizeText(
+                              maxFontSize: 19,
+                              minFontSize: 17,
+                              textAlign: TextAlign.center,
+                              '${_idTypeController.text.toString()} - ${_idNumberController.text.toString()}')),
+                    ),
+                    CustomTextForm(
+                      iconColor: Colors.black,
+                      controller: _nombreController,
+                      hintText: 'Nombre',
+                      prefixIcon: Icons.person,
+                      validator: (value) =>
+                          value!.isEmpty ? 'El nombre es requerido' : null,
+                    ),
+                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                    CustomTextForm(
+                      iconColor: Colors.black,
+                      controller: _usernameController,
+                      hintText: 'Usuario',
+                      prefixIcon: Icons.account_circle,
+                      validator: (value) =>
+                          value!.isEmpty ? 'El usuario es requerido' : null,
+                    ),
+                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                    CustomTextForm(
+                      iconColor: Colors.black,
+                      controller: _emailController,
+                      hintText: 'Correo',
+                      prefixIcon: Icons.email,
+                      validator: (value) =>
+                          value!.isEmpty ? 'El correo es requerido' : null,
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                    CustomTextForm(
+                      iconColor: Colors.black,
+                      controller: _fechaController,
+                      hintText: 'Fecha de Registro',
+                      prefixIcon: Icons.calendar_today,
+                      validator: (value) =>
+                          value!.isEmpty ? 'La fecha es requerida' : null,
+                      keyboardType: TextInputType.datetime,
+                    ),
+                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                    CustomTextForm(
+                      iconColor: Colors.black,
+                      controller: _sexoController,
+                      hintText: 'Sexo',
+                      prefixIcon: Icons.person_outline,
+                      validator: (value) =>
+                          value!.isEmpty ? 'El sexo es requerido' : null,
+                    ),
+                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                    CustomTextForm(
+                      iconColor: Colors.black,
+                      controller: _telefonoController,
+                      hintText: 'Teléfono',
+                      prefixIcon: Icons.phone,
+                      validator: (value) =>
+                          value!.isEmpty ? 'El teléfono es requerido' : null,
+                      keyboardType: TextInputType.phone,
+                    ),
+                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.03),
+                    SizedBox(
+                      width: MediaQuery.sizeOf(context).height * 0.03,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              const Color.fromARGB(255, 249, 188, 99),
+                        ),
+                        child: const Text(
+                          'Guardar Cambios',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () async {
+                          await updateUserData(context);
+                        },
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
+            ]),
     );
   }
 }
