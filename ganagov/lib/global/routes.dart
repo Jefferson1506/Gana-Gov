@@ -13,6 +13,6 @@ Map<String, Widget Function(BuildContext)> routes = {
   "new_user": (_) => const NewUser(),
   "recover": (_) => const RecoverPassword(),
   "home_buyer": (_) => const HomeBuyer(),
-  "home_seller": (_) => const HomeSeller(),
+  "home_seller": (_) => PublicViewPage(),
   "home_admin": (_) => const AdminHomePage(),
 };

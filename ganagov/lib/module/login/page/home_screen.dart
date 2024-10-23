@@ -56,7 +56,7 @@ class HomeScreen extends StatelessWidget {
                 origin: context,
                 text: "Soy Comprador",
                 color: color.secondary,
-                onpress: () => Navigator.pushNamed(context, "home_buyer"),
+                onpress: () => Navigator.pushNamed(context, "home_seller"),
               ),
             ],
           ),

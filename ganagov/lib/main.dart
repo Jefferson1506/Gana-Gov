@@ -12,16 +12,14 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:page_transition/page_transition.dart';
 
 void main() async {
-  
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
- await Hive.initFlutter();
+  await Hive.initFlutter();
   Hive.registerAdapter(UserModelAdapter());
 
-  
   await Hive.openBox<UserModel>('users');
 
   runApp(const MyApp());

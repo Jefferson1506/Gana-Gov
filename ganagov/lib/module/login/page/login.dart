@@ -136,7 +136,9 @@ class Login extends StatelessWidget {
                       height: size * 0.04,
                     ),
                     TextButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, "home_seller");
+                      },
                       label: AutoSizeText(
                         "Ver Publicaciones",
                         style:
