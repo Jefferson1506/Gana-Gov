@@ -59,44 +59,95 @@ class _HomeBuyerState extends State<HomeBuyer> {
     });
   }
 
-  Future<void> _updateUserData(BuildContext context) async {
+  Future<String?> getUserIdByUsername(
+      BuildContext context, String username) async {
+    try {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('Users')
+          .where('idNumber', isEqualTo: username)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        return querySnapshot.docs.first.id;
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Usuario no encontrado")),
+        );
+        return null;
+      }
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Error al buscar el usuario: $error")),
+      );
+      return null;
+    }
+  }
+
+  Future<void> updateUserData(BuildContext context) async {
     LoadingDialog.showLoadingDialog(context);
 
     if (_userModel != null) {
-      // Intentar actualizar el documento, o crear uno nuevo si no existe
-      FirebaseFirestore.instance
-          .collection('Users')
-          .doc(_userModel!.username)
-          .set({
-        'User': _usernameController.text,
-        'correo': _emailController.text,
-        'fecha': _fechaController.text,
-        'idNumber': _idNumberController.text,
-        'idType': _idTypeController.text,
-        'nombre': _nombreController.text,
-        'sexo': _sexoController.text,
-        'telefono': _telefonoController.text,
-      }, SetOptions(merge: true));
+      String? userId =
+          await getUserIdByUsername(context, _userModel!.idNumber.toString());
 
-      _userModel = UserModel(
-        username: _usernameController.text,
-        correo: _emailController.text,
-        fecha: _fechaController.text,
-        idNumber: _idNumberController.text,
-        idType: _idTypeController.text,
-        nombre: _nombreController.text,
-        sexo: _sexoController.text,
-        telefono: _telefonoController.text,
-        password: _userModel!.password,
-        role: _userModel!.role,
-        estado: _userModel!.estado,
-        superAdmin: _userModel!.superAdmin,
-      );
+      if (userId != null) {
+        try {
+          await FirebaseFirestore.instance
+              .collection('Users')
+              .doc(userId)
+              .update({
+            'User': _usernameController.text,
+            'correo': _emailController.text,
+            'fecha': _fechaController.text,
+            'idNumber': _idNumberController.text,
+            'idType': _idTypeController.text,
+            'nombre': _nombreController.text,
+            'sexo': _sexoController.text,
+            'telefono': _telefonoController.text,
+          });
 
-      if (_userBox!.isNotEmpty) {
-        await _userBox!.putAt(0, _userModel!);
+          _userModel = UserModel(
+            username: _usernameController.text,
+            correo: _emailController.text,
+            fecha: _fechaController.text,
+            idNumber: _idNumberController.text,
+            idType: _idTypeController.text,
+            nombre: _nombreController.text,
+            sexo: _sexoController.text,
+            telefono: _telefonoController.text,
+            password: _userModel!.password,
+            role: _userModel!.role,
+            estado: _userModel!.estado,
+            superAdmin: _userModel!.superAdmin,
+          );
+
+          if (_userBox!.isNotEmpty) {
+            await _userBox!.putAt(0, _userModel!);
+          } else {
+            await _userBox!.add(_userModel!);
+          }
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+                backgroundColor: Colors.yellow,
+                content: Text(
+                  "Datos del usuario actualizados.",
+                  style: TextStyle(color: Colors.black),
+                )),
+          );
+        } catch (e) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                backgroundColor: Colors.red,
+                content: Text("Error al actualizar datos: $e")),
+          );
+        }
       } else {
-        await _userBox!.add(_userModel!);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              backgroundColor: Colors.grey,
+              content: Text("El usuario no existe en la base de datos.")),
+        );
       }
     }
 
@@ -153,6 +204,22 @@ class _HomeBuyerState extends State<HomeBuyer> {
                 children: [
                   _buildCircleAvatar(),
                   SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                  Padding(
+                    padding: const EdgeInsets.all(13.0),
+                    child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10))),
+                        height: MediaQuery.sizeOf(context).height * 0.07,
+                        width: MediaQuery.sizeOf(context).width * 0.03,
+                        child: AutoSizeText(
+                            maxFontSize: 19,
+                            minFontSize: 17,
+                            textAlign: TextAlign.center,
+                            '${_idTypeController.text.toString()} - ${_idNumberController.text.toString()}')),
+                  ),
                   CustomTextForm(
                     iconColor: Colors.black,
                     controller: _nombreController,
@@ -193,25 +260,6 @@ class _HomeBuyerState extends State<HomeBuyer> {
                   SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
                   CustomTextForm(
                     iconColor: Colors.black,
-                    controller: _idNumberController,
-                    hintText: 'Número de Identificación',
-                    prefixIcon: Icons.badge,
-                    validator: (value) =>
-                        value!.isEmpty ? 'El número es requerido' : null,
-                    keyboardType: TextInputType.number,
-                  ),
-                  SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-                  CustomTextForm(
-                    iconColor: Colors.black,
-                    controller: _idTypeController,
-                    hintText: 'Tipo de Identificación',
-                    prefixIcon: Icons.credit_card,
-                    validator: (value) =>
-                        value!.isEmpty ? 'El tipo es requerido' : null,
-                  ),
-                  SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-                  CustomTextForm(
-                    iconColor: Colors.black,
                     controller: _sexoController,
                     hintText: 'Sexo',
                     prefixIcon: Icons.person_outline,
@@ -234,11 +282,7 @@ class _HomeBuyerState extends State<HomeBuyer> {
                     color: const Color.fromARGB(255, 17, 163, 3),
                     origin: context,
                     onpress: () async {
-                      await _updateUserData(context);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            backgroundColor: Colors.yellow,
-                            content: Text("Perfil actualizado",style: TextStyle(color: Colors.black),)));
+                      await updateUserData(context);
                     },
                   )
                 ],
