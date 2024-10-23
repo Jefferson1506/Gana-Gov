@@ -10,14 +10,14 @@ class CustomText extends StatelessWidget {
   final int maxLines;
 
   const CustomText({
-    Key? key,
+    super.key,
     required this.text,
     this.textAlign = TextAlign.center,
     this.maxLines = 1,
     this.colorText = Colors.black,
     this.sizeText = 17,
     this.bold = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

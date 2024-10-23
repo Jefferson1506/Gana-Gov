@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ShowImagePage extends StatelessWidget {
   final String imageUrl;
 
-  ShowImagePage({required this.imageUrl});
+  const ShowImagePage({required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {

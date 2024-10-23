@@ -34,16 +34,15 @@ class _AdminHomePageState extends State<AdminHomePage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 39, 48, 39),
       appBar: AppBar(
+        
         shape: LinearBorder.bottom(
             side: const BorderSide(color: Colors.white, width: 10)),
         toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(
-            Icons.arrow_back_ios_outlined,
-            color: Colors.white,
-          ),
-        ),
+        leading: null,
+        actions: [
+             IconButton(onPressed: ()=>logout, icon: const Icon(Icons.people,color: Colors.cyanAccent,)),
+          IconButton(onPressed: ()=>exitApp, icon: const Icon(Icons.exit_to_app,color: Colors.orange,))
+        ],
         title: const AutoSizeText(
           'Administrador',
           minFontSize: 18,
@@ -55,7 +54,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
       ),
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomBarInspiredInside(
-        items:  [
+        items: [
           const TabItem(
             icon: Icons.person,
             title: 'Control Usuarios',
@@ -68,11 +67,11 @@ class _AdminHomePageState extends State<AdminHomePage> {
             icon: Icons.pets,
             title: 'CRUD Razas',
           ),
-          if(statusAdmi == true)
-          const TabItem(
-            icon: Icons.settings,
-            title: 'Admin',
-          ),
+          if (statusAdmi == true)
+            const TabItem(
+              icon: Icons.settings,
+              title: 'Admin',
+            ),
         ],
         backgroundColor: colorScheme.secondary,
         color: const Color.fromARGB(255, 39, 48, 39),
@@ -90,16 +89,22 @@ class _AdminHomePageState extends State<AdminHomePage> {
 }
 
 Future<void> logout(BuildContext context) async {
-  var box = await Hive.openBox('users');
+  var box = Hive.box<UserModel>('users');
   await box.clear();
 
   Navigator.pushReplacementNamed(context, 'login');
 }
 
 Future<bool> statusAdminh() async {
-  final box = await Hive.openBox('users');
-  final a = box.values as UserModel;
-  return a.superAdmin!;
+  final box = Hive.box<UserModel>('users');
+
+  if (box.isNotEmpty) {
+    UserModel user = box.getAt(0)!;
+
+    return user.superAdmin ?? false;
+  }
+
+  return false;
 }
 
 void exitApp() {

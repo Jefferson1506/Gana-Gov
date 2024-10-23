@@ -9,7 +9,7 @@ class UserProvider extends ChangeNotifier {
   Future<void> fetchUsers() async {
     final snapshot = await _firestore.collection('Users').get();
     _allUsers = snapshot.docs.map((doc) {
-      final data = doc.data() as Map<String, dynamic>;
+      final data = doc.data();
       data['id'] = doc.id;
       return data;
     }).toList();
