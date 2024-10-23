@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ganagov/module/admin/page/home_admin.dart';
-import 'package:ganagov/module/buyer/home_buyer.dart';
+import 'package:ganagov/module/buyer/page/home_buyer.dart';
 import 'package:ganagov/module/login/page/home_screen.dart';
 import 'package:ganagov/module/login/page/login.dart';
 import 'package:ganagov/module/login/page/new_user.dart';

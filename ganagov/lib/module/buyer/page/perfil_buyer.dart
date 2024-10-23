@@ -9,14 +9,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-class HomeBuyer extends StatefulWidget {
-  const HomeBuyer({super.key});
+class PerfilBuyer extends StatefulWidget {
+  const PerfilBuyer({super.key});
 
   @override
-  State<HomeBuyer> createState() => _HomeBuyerState();
+  State<PerfilBuyer> createState() => _PerfilBuyerState();
 }
 
-class _HomeBuyerState extends State<HomeBuyer> {
+class _PerfilBuyerState extends State<PerfilBuyer> {
   late TextEditingController _usernameController;
   late TextEditingController _emailController;
   late TextEditingController _fechaController;
