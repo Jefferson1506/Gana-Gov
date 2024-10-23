@@ -1,6 +1,5 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
-
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -134,7 +133,7 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
 
         final imageUrls = await _uploadImages();
         final videoUrl = await _uploadVideo();
-
+        final dataTime = DateTime.now().toString();
         await FirebaseFirestore.instance.collection('Ganado').add({
           'idNumber': _userModel.idNumber,
           'telefono': _userModel.telefono,
@@ -150,15 +149,35 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
           'descripcion': _descripcionController.text,
           'fotos': imageUrls,
           'video': videoUrl,
-          'estado': 'VENTA'
+          'estado': 'VENTA',
+          'fecha': dataTime
         });
         LoadingDialog.dismissLoadingDialog(context);
         NotifyDialog.showSuccessDialog(context);
+        _limpiarFormulario();
       } catch (e) {
         LoadingDialog.dismissLoadingDialog(context);
         NotifyDialog.showErrorDialog(context, "Error al registrar: $e");
       }
     }
+  }
+
+  void _limpiarFormulario() {
+    _pesoController.clear();
+    _edadController.clear();
+    _precioController.clear();
+    _cantidadController.clear();
+    _descripcionController.clear();
+
+    setState(() {
+      _tipoVentaSeleccionado = '';
+      _categoriaSeleccionada = '';
+      _razaSeleccionada = '';
+      _departamentoSeleccionado = '';
+      _negociable = false;
+      _images.clear(); // Limpiar la lista de imágenes
+      _video = null; // Limpiar el video seleccionado
+    });
   }
 
   @override
@@ -183,8 +202,8 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
               BorderSide(color: Color.fromARGB(255, 17, 163, 3), width: 5),
         ),
       ),
-      body: ListView(
-        children: [Padding(
+      body: ListView(children: [
+        Padding(
           padding: const EdgeInsets.all(16.0),
           child: Form(
             key: _formKey,
@@ -397,17 +416,22 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
                     : const Text('No se ha seleccionado un video'),
                 const SizedBox(height: 16.0),
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor:  const Color.fromARGB(255, 249, 188, 99),),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 249, 188, 99),
+                  ),
                   onPressed: () async {
                     _submitForm(context);
                   },
-                  child: const Text('Registrar Ganado',style: TextStyle(color: Colors.white),),
+                  child: const Text(
+                    'Registrar Ganado',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ],
             ),
           ),
-        ),]
-      ),
+        ),
+      ]),
     );
   }
 
