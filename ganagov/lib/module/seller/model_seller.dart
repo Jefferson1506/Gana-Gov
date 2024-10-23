@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+
 class Sale {
   final String id;
   final String cantidad;
@@ -41,21 +42,21 @@ class Sale {
     final data = doc.data() as Map<String, dynamic>;
     return Sale(
       id: doc.id,
-      cantidad: data['cantidad'],
-      categoria: data['categoria'],
-      departamento: data['departamento'],
-      descripcion: data['descripcion'],
-      edad: data['edad'],
-      estado: data['estado'],
-      fecha: data['fecha'],
+      cantidad: data['cantidad'] ?? '',
+      categoria: data['categoria'] ?? '',
+      departamento: data['departamento'] ?? '',
+      descripcion: data['descripcion'] ?? '',
+      edad: data['edad'] ?? '',
+      estado: data['estado'] ?? '',
+      fecha: data['fecha'] ?? '',
       fotos: List<String>.from(data['fotos'] ?? []),
-      idNumber: data['idNumber'],
+      idNumber: data['idNumber'] ?? '',
       negociable: data['negociable'] ?? false,
-      peso: data['peso'],
-      precio: data['precio'],
-      raza: data['raza'],
-      telefono: data['telefono'],
-      tipoVenta: data['tipoVenta'],
+      peso: data['peso'] ?? '',
+      precio: data['precio'] ?? '',
+      raza: data['raza'] ?? '',
+      telefono: data['telefono'] ?? '',
+      tipoVenta: data['tipoVenta'] ?? '',
     );
   }
 }

@@ -175,8 +175,8 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
       _razaSeleccionada = '';
       _departamentoSeleccionado = '';
       _negociable = false;
-      _images.clear(); // Limpiar la lista de imágenes
-      _video = null; // Limpiar el video seleccionado
+      _images.clear(); 
+      _video = null; 
     });
   }
 

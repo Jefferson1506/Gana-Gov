@@ -1,134 +1,163 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ganagov/global/widgets/text_span.dart';
 import 'package:ganagov/module/seller/detalle.dart';
 import 'package:ganagov/module/seller/model_seller.dart';
 
-class PublicViewPage extends StatefulWidget {
+class SalesView extends StatefulWidget {
   @override
-  _PublicViewPageState createState() => _PublicViewPageState();
+  _SalesViewState createState() => _SalesViewState();
 }
 
-class _PublicViewPageState extends State<PublicViewPage> {
-  List<Sale> sales = [];
-  List<String> breeds = [];
+class _SalesViewState extends State<SalesView> {
   String? selectedBreed;
   String? selectedDepartment;
   String? selectedCategory;
   String? selectedSaleType;
 
-  final List<String> categories = ['Lechero', 'De Carne', 'Doble Propósito'];
-  final List<String> saleTypes = ['Animal', 'Lote'];
+  List<Sale> allSales = [];
+  List<Sale> filteredSales = [];
+
+  final List<String> _categorias = ['Lechero', 'De Carne', 'Doble Propósito'];
+  final List<String> _tiposVenta = ['Animal', 'Lote'];
+  final List<String> _departamentos = [];
 
   @override
   void initState() {
     super.initState();
-    fetchSales();
-    fetchBreeds();
+    fetchSalesData();
   }
 
-  Future<void> fetchSales() async {
-    final QuerySnapshot snapshot =
-        await FirebaseFirestore.instance.collection('ganado').get();
-    setState(() {
-      sales = snapshot.docs.map((doc) => Sale.fromFirestore(doc)).toList();
-    });
-  }
-
-  Future<void> fetchBreeds() async {
-    final QuerySnapshot snapshot =
-        await FirebaseFirestore.instance.collection('Breeds').get();
-    setState(() {
-      breeds = snapshot.docs.map((doc) => doc['name'] as String).toList();
-    });
-  }
-
-  List<Sale> get filteredSales {
-    return sales.where((sale) {
-      final matchesBreed = selectedBreed == null || sale.raza == selectedBreed;
-      final matchesDepartment =
-          selectedDepartment == null || sale.departamento == selectedDepartment;
-      final matchesCategory =
-          selectedCategory == null || sale.categoria == selectedCategory;
-      final matchesSaleType =
-          selectedSaleType == null || sale.tipoVenta == selectedSaleType;
-      return matchesBreed &&
-          matchesDepartment &&
-          matchesCategory &&
-          matchesSaleType;
+  Future<void> fetchSalesData() async {
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('Ganado').get();
+    allSales = querySnapshot.docs.map((doc) {
+      return Sale.fromFirestore(doc);
     }).toList();
+    filteredSales = allSales;
+    setState(() {});
+  }
+
+  void filterSales() {
+    setState(() {
+      filteredSales = allSales.where((sale) {
+        return (selectedBreed == null || sale.raza == selectedBreed) &&
+            (selectedDepartment == null ||
+                sale.departamento == selectedDepartment) &&
+            (selectedCategory == null || sale.categoria == selectedCategory) &&
+            (selectedSaleType == null || sale.tipoVenta == selectedSaleType);
+      }).toList();
+    });
+  }
+
+  void resetFilters() {
+    setState(() {
+      selectedBreed = null;
+      selectedDepartment = null;
+      selectedCategory = null;
+      selectedSaleType = null;
+      filteredSales = allSales;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final height = MediaQuery.sizeOf(context).height;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Ventas Disponibles'),
+        toolbarHeight: height * 0.1,
+        centerTitle: true,
+        title: CustomTextSpan(
+          primary: const Color.fromARGB(255, 54, 54, 54),
+          secondary: colorScheme.primary,
+          textPrimary: "Ventas de Ganado     Gana",
+          textSecondary: "Gov",
+          sizePrimary: 23,
+          sizeSecondary: 23,
+        ),
+        shape: const UnderlineInputBorder(
+          borderSide:
+              BorderSide(color: Color.fromARGB(255, 17, 163, 3), width: 5),
+        ),
       ),
-      body: ListView(
+      body: Column(
         children: [
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                DropdownButton<String>(
-                  hint: const Text('Raza'),
-                  value: selectedBreed,
-                  items: breeds.map((String breed) {
-                    return DropdownMenuItem(value: breed, child: Text(breed));
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      selectedBreed = value;
-                    });
-                  },
-                ),
-                DropdownButton<String>(
-                  hint: const Text('Departamento'),
-                  value: selectedDepartment,
-                  items: sales
-                      .map((sale) {
-                        return DropdownMenuItem(
-                            value: sale.departamento,
-                            child: Text(sale.departamento));
-                      })
-                      .toSet()
-                      .toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      selectedDepartment = value;
-                    });
-                  },
-                ),
-                DropdownButton<String>(
-                  hint: const Text('Categoría'),
-                  value: selectedCategory,
-                  items: categories.map((String category) {
-                    return DropdownMenuItem(
-                        value: category, child: Text(category));
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      selectedCategory = value;
-                    });
-                  },
-                ),
-                DropdownButton<String>(
-                  hint: const Text('Tipo de Venta'),
-                  value: selectedSaleType,
-                  items: saleTypes.map((String saleType) {
-                    return DropdownMenuItem(
-                        value: saleType, child: Text(saleType));
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      selectedSaleType = value;
-                    });
-                  },
-                ),
-              ],
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  IconButton(
+                    onPressed: resetFilters,
+                    icon: Icon(
+                      Icons.remove_circle,
+                      color: Colors.red,
+                    ),
+                  ),
+
+                  DropdownButton<String>(
+                    hint: const Text('Raza'),
+                    value: selectedBreed,
+                    items: [],
+                    onChanged: (value) {
+                      setState(() {
+                        selectedBreed = value;
+                      });
+                      filterSales();
+                    },
+                  ),
+                  DropdownButton<String>(
+                    hint: const Text('Departamento'),
+                    value: selectedDepartment,
+                    items: _departamentos.map((String department) {
+                      return DropdownMenuItem(
+                          value: department, child: Text(department));
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedDepartment = value;
+                      });
+                      filterSales();
+                    },
+                  ),
+                  DropdownButton<String>(
+                    hint: const Text('Categoría'),
+                    value: selectedCategory,
+                    items: _categorias.map((String category) {
+                      return DropdownMenuItem(
+                          value: category, child: Text(category));
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedCategory = value;
+                      });
+                      filterSales();
+                    },
+                  ),
+                  DropdownButton<String>(
+                    hint: const Text('Tipo de Venta'),
+                    value: selectedSaleType,
+                    items: _tiposVenta.map((String saleType) {
+                      return DropdownMenuItem(
+                          value: saleType, child: Text(saleType));
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedSaleType = value;
+                      });
+                      filterSales();
+                    },
+                  ),
+                  // Botón para resetear filtros
+                ],
+              ),
             ),
           ),
+          // Lista de Ventas
           Expanded(
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -139,8 +168,11 @@ class _PublicViewPageState extends State<PublicViewPage> {
               itemBuilder: (context, index) {
                 final sale = filteredSales[index];
                 return Card(
-                  elevation: 4,
-                  margin: const EdgeInsets.all(8),
+                  elevation: 6,
+                  margin: const EdgeInsets.all(10),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -153,17 +185,24 @@ class _PublicViewPageState extends State<PublicViewPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Image.network(
-                          sale.fotos[0],
-                          fit: BoxFit.cover,
-                          height: 100,
-                          width: double.infinity,
+                        ClipRRect(
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(15)),
+                          child: Image.network(
+                            sale.fotos.isNotEmpty ? sale.fotos[0] : '',
+                            fit: BoxFit.cover,
+                            height: 100,
+                            width: double.infinity,
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             'Raza: ${sale.raza}',
-                            style: const TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green,
+                            ),
                           ),
                         ),
                         Padding(
@@ -173,6 +212,10 @@ class _PublicViewPageState extends State<PublicViewPage> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Text('Tipo: ${sale.tipoVenta}'),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text('Teléfono: ${sale.telefono}'),
                         ),
                       ],
                     ),
