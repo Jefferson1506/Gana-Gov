@@ -33,7 +33,6 @@ class CustomTextForm extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: TextFormField(
-        maxLines: null,
         controller: controller,
         keyboardType: keyboardType,
         validator: validator,

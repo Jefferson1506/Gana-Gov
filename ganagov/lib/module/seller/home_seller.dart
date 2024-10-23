@@ -93,7 +93,7 @@ class _SalesViewState extends State<SalesView> {
                 children: [
                   IconButton(
                     onPressed: resetFilters,
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.remove_circle,
                       color: Colors.red,
                     ),
@@ -152,12 +152,12 @@ class _SalesViewState extends State<SalesView> {
                       filterSales();
                     },
                   ),
-                  // Botón para resetear filtros
+                 
                 ],
               ),
             ),
           ),
-          // Lista de Ventas
+ 
           Expanded(
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -187,7 +187,7 @@ class _SalesViewState extends State<SalesView> {
                       children: [
                         ClipRRect(
                           borderRadius:
-                              BorderRadius.vertical(top: Radius.circular(15)),
+                              const BorderRadius.vertical(top: Radius.circular(15)),
                           child: Image.network(
                             sale.fotos.isNotEmpty ? sale.fotos[0] : '',
                             fit: BoxFit.cover,
