@@ -55,7 +55,7 @@ class Login extends StatelessWidget {
                         controller: provider.passwordController,
                         obscureText: provider.obscureText,
                         obscuringCharacter: "*",
-                        keyboardType: TextInputType.emailAddress,
+                        keyboardType: TextInputType.visiblePassword,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Por favor ingresa contraseña';

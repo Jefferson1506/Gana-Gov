@@ -61,7 +61,9 @@ class UserListWithFilter extends StatelessWidget {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ListTile(
-                          tileColor: user['Estado'] =='SI'?Colors.green:Colors.grey,
+                          tileColor: user['Estado'] == 'SI'
+                              ? Colors.green
+                              : Colors.grey,
                           textColor: Colors.white,
                           shape: const RoundedRectangleBorder(
                               side: BorderSide(
@@ -102,7 +104,7 @@ class UserListWithFilter extends StatelessWidget {
 void _showUpdateDialog(
     BuildContext context, UserProvider provider, Map<String, dynamic> user) {
   final TextEditingController statusController =
-      TextEditingController(text: user['estado']);
+      TextEditingController(text: user['Estado']);
   bool isUpdating = false;
 
   showDialog(
@@ -124,16 +126,19 @@ void _showUpdateDialog(
               isUpdating
                   ? const CircularProgressIndicator()
                   : ElevatedButton(
-                      onPressed: statusController.text.isEmpty ||
-                              statusController.text == user['estado']
-                          ? null
-                          : () async {
-                              setState(() => isUpdating = true);
-                              await provider.updateUserStatus(
-                                  user['id'], statusController.text);
-                              setState(() => isUpdating = false);
-                              Navigator.of(context).pop();
-                            },
+                      onPressed: () async {
+                        setState(() => isUpdating = true);
+                        await provider.updateUserStatus(
+                            user['id'],
+                            statusController.text
+                                .toString()
+                                .trim()
+                                .toUpperCase());
+                        setState(() => isUpdating = false);
+
+                        provider.fetchUsers();
+                        Navigator.of(context).pop();
+                      },
                       child: const Text('Actualizar'),
                     ),
             ],

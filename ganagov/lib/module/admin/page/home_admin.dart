@@ -40,8 +40,8 @@ class _AdminHomePageState extends State<AdminHomePage> {
         toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
         leading: null,
         actions: [
-             IconButton(onPressed: ()=>logout, icon: const Icon(Icons.people,color: Colors.cyanAccent,)),
-          IconButton(onPressed: ()=>exitApp, icon: const Icon(Icons.exit_to_app,color: Colors.orange,))
+             IconButton(onPressed: ()=>logout(context), icon: const Icon(Icons.people,color: Colors.cyanAccent,)),
+          IconButton(onPressed: ()=>exitApp(), icon: const Icon(Icons.exit_to_app,color: Colors.orange,))
         ],
         title: const AutoSizeText(
           'Administrador',

@@ -40,18 +40,18 @@ class UserProvider extends ChangeNotifier {
 
   Future<void> updateUserStatus(String userId, String newStatus) async {
     await _firestore.collection('Users').doc(userId).update({
-      'estado': newStatus,
+      'Estado': newStatus,
     });
 
     final userIndex = _allUsers.indexWhere((user) => user['id'] == userId);
     if (userIndex != -1) {
-      _allUsers[userIndex]['estado'] = newStatus;
+      _allUsers[userIndex]['Estado'] = newStatus;
     }
 
     final filteredUserIndex =
         filteredUsers.indexWhere((user) => user['id'] == userId);
     if (filteredUserIndex != -1) {
-      filteredUsers[filteredUserIndex]['estado'] = newStatus;
+      filteredUsers[filteredUserIndex]['Estado'] = newStatus;
     }
 
     notifyListeners();

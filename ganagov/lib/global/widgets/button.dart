@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+
 class CustomButton extends StatelessWidget {
   final String text;
   final double sizeWidth;
@@ -13,9 +14,9 @@ class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
     required this.text,
-    this.sizeWidth = 0.9,  
+    this.sizeWidth = 0.9,
     this.sizeHeight = 0.08,
-    this.sizeText = 17, 
+    this.sizeText = 17,
     required this.color,
     this.colorText = Colors.white,
     required this.origin,
@@ -33,13 +34,13 @@ class CustomButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: color,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10), // Bordes redondeados
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
           child: AutoSizeText(
             text,
             style: TextStyle(color: colorText, fontSize: sizeText),
-            textAlign: TextAlign.center, // Alineación de texto centrada
+            textAlign: TextAlign.center,
           ),
         ),
       ),
