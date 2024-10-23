@@ -71,9 +71,13 @@ class _MySalesPageState extends State<MySalesPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Cantidad: ${venta['cantidad']}',
+                      Text('Fecha: ${venta['fecha']}',
                           style: const TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold)),
+                      Text('Cantidad: ${venta['cantidad']}',
+                          style: const TextStyle(
+                            fontSize: 16,
+                          )),
                       Text('Categoría: ${venta['categoria']}',
                           style: const TextStyle(fontSize: 16)),
                       Text('Departamento: ${venta['departamento']}',

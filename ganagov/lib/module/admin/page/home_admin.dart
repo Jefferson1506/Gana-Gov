@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:ganagov/global/user_model.dart';
 import 'package:ganagov/module/admin/page/Breed.dart';
 import 'package:ganagov/module/admin/page/new_admin.dart';
-import 'package:ganagov/module/admin/statistics.dart';
+import 'package:ganagov/module/admin/page/statistics.dart';
 import 'package:ganagov/module/admin/page/user_control_page.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -21,7 +21,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
 
   final List<Widget> _pages = [
     const UserManagementPage(),
-    const StatisticsPage(),
+    StatisticsPage(),
     const BreedCrudPage(),
     const NewAdmin()
   ];
@@ -34,14 +34,23 @@ class _AdminHomePageState extends State<AdminHomePage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 39, 48, 39),
       appBar: AppBar(
-        
         shape: LinearBorder.bottom(
             side: const BorderSide(color: Colors.white, width: 10)),
         toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
         leading: null,
         actions: [
-             IconButton(onPressed: ()=>logout(context), icon: const Icon(Icons.people,color: Colors.cyanAccent,)),
-          IconButton(onPressed: ()=>exitApp(), icon: const Icon(Icons.exit_to_app,color: Colors.orange,))
+          IconButton(
+              onPressed: () => logout(context),
+              icon: const Icon(
+                Icons.people,
+                color: Colors.cyanAccent,
+              )),
+          IconButton(
+              onPressed: () => exitApp(),
+              icon: const Icon(
+                Icons.exit_to_app,
+                color: Colors.orange,
+              ))
         ],
         title: const AutoSizeText(
           'Administrador',
