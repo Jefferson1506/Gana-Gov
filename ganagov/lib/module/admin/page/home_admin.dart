@@ -26,10 +26,29 @@ class _AdminHomePageState extends State<AdminHomePage> {
     const NewAdmin()
   ];
 
+  late bool statusAdmi = false;
+
+  @override
+  void initState() {
+    super.initState();
+    statusAdminh();
+  }
+
+  Future<void> statusAdminh() async {
+    final box = Hive.box<UserModel>('users');
+
+    if (box.isNotEmpty) {
+      UserModel user = box.getAt(0)!;
+
+      setState(() {
+        statusAdmi = user.superAdmin ?? false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final statusAdmi = statusAdminh();
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 39, 48, 39),
@@ -76,7 +95,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
             icon: Icons.pets,
             title: 'CRUD Razas',
           ),
-          if (statusAdmi == true)
+          if (statusAdmi)
             const TabItem(
               icon: Icons.settings,
               title: 'Admin',
@@ -102,18 +121,6 @@ Future<void> logout(BuildContext context) async {
   await box.clear();
 
   Navigator.pushReplacementNamed(context, 'login');
-}
-
-Future<bool> statusAdminh() async {
-  final box = Hive.box<UserModel>('users');
-
-  if (box.isNotEmpty) {
-    UserModel user = box.getAt(0)!;
-
-    return user.superAdmin ?? false;
-  }
-
-  return false;
 }
 
 void exitApp() {

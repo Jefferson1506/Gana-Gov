@@ -11,9 +11,7 @@ class StatisticsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Estadísticas de Ventas"),
-      ),
+      backgroundColor: const Color.fromARGB(255, 39, 48, 39),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -82,7 +80,9 @@ class StatisticsPage extends StatelessWidget {
           int totalVentas = snapshot.data!.docs.length;
 
           return SfCartesianChart(
-            title: const ChartTitle(text: 'Total de Ventas'),
+            title: const ChartTitle(
+                text: 'Total de Ventas',
+                textStyle: TextStyle(color: Colors.white)),
             primaryXAxis: const CategoryAxis(),
             series: <CartesianSeries>[
               ColumnSeries<dynamic, String>(
@@ -125,7 +125,9 @@ class StatisticsPage extends StatelessWidget {
               Color.fromARGB(255, 17, 163, 3),
               Color.fromARGB(255, 249, 188, 99),
             ],
-            title: const ChartTitle(text: 'Tipos de Ventas'),
+            title: const ChartTitle(
+                text: 'Tipos de Ventas',
+                textStyle: TextStyle(color: Colors.white)),
             legend: const Legend(isVisible: true),
             series: <CircularSeries>[
               PieSeries<MapEntry<String, int>, String>(
@@ -171,7 +173,9 @@ class StatisticsPage extends StatelessWidget {
             palette: const [
               Color(0xFF98FF98),
             ],
-            title: const ChartTitle(text: 'Precio Promedio de Ventas Global'),
+            title: const ChartTitle(
+                text: 'Precio Promedio de Ventas Global',
+                textStyle: TextStyle(color: Colors.white)),
             primaryXAxis: const CategoryAxis(),
             series: <CartesianSeries>[
               ColumnSeries<dynamic, String>(
@@ -213,7 +217,9 @@ class StatisticsPage extends StatelessWidget {
             palette: const [
               Colors.pinkAccent,
             ],
-            title: const ChartTitle(text: 'Razas Más Vendidas'),
+            title: const ChartTitle(
+                text: 'Razas Más Vendidas',
+                textStyle: TextStyle(color: Colors.white)),
             primaryXAxis: const CategoryAxis(),
             series: <CartesianSeries>[
               ColumnSeries<MapEntry<String, int>, String>(
@@ -254,7 +260,9 @@ class StatisticsPage extends StatelessWidget {
             palette: const [
               Colors.teal,
             ],
-            title: const ChartTitle(text: 'Ventas por Departamento'),
+            title: const ChartTitle(
+                text: 'Ventas por Departamento',
+                textStyle: TextStyle(color: Colors.white)),
             primaryXAxis: const CategoryAxis(),
             series: <CartesianSeries>[
               ColumnSeries<MapEntry<String, int>, String>(
