@@ -123,7 +123,6 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
 
       try {
         final _userBox = Hive.box<UserModel>('users');
-
         final _userModel = _userBox.getAt(0);
 
         if (_userModel!.idNumber == null) {
@@ -135,6 +134,7 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
         final imageUrls = await _uploadImages();
         final videoUrl = await _uploadVideo();
         final dataTime = DateTime.now().toString();
+
         await FirebaseFirestore.instance.collection('Ganado').add({
           'idNumber': _userModel.idNumber,
           'telefono': _userModel.telefono,
@@ -146,7 +146,8 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
           'edad': _edadController.text,
           'precio': _precioController.text,
           'negociable': _negociable,
-          'cantidad': _cantidadController.text,
+          'cantidad':
+              _tipoVentaSeleccionado == 'Lote' ? _cantidadController.text : '1',
           'descripcion': _descripcionController.text,
           'fotos': imageUrls,
           'video': videoUrl,
@@ -154,6 +155,7 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
           'fecha': dataTime,
           'municipio': _municipio.text
         });
+
         LoadingDialog.dismissLoadingDialog(context);
         NotifyDialog.showSuccessDialog(context);
         _limpiarFormulario();
@@ -170,7 +172,8 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
     _precioController.clear();
     _cantidadController.clear();
     _descripcionController.clear();
-    _municipio.clear;
+    _municipio.clear();
+
     setState(() {
       _tipoVentaSeleccionado = '';
       _categoriaSeleccionada = '';
@@ -188,265 +191,291 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
     final height = MediaQuery.sizeOf(context).height;
 
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: height * 0.1,
-        centerTitle: true,
-        title: CustomTextSpan(
-          primary: const Color.fromARGB(255, 54, 54, 54),
-          secondary: colorScheme.primary,
-          textPrimary: "Registro de Ganado     Gana",
-          textSecondary: "Gov",
-          sizePrimary: 23,
-          sizeSecondary: 23,
-        ),
-        shape: const UnderlineInputBorder(
-          borderSide:
-              BorderSide(color: Color.fromARGB(255, 17, 163, 3), width: 5),
-        ),
-      ),
-      body: ListView(children: [
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-                DropdownButtonFormField<String>(
-                  value: _tipoVentaSeleccionado.isNotEmpty
-                      ? _tipoVentaSeleccionado
-                      : null,
-                  decoration: const InputDecoration(
-                    labelText: 'Tipo de Venta',
-                    border: OutlineInputBorder(),
-                  ),
-                  items: _tiposVenta.map((String tipo) {
-                    return DropdownMenuItem<String>(
-                      value: tipo,
-                      child: Text(tipo),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      _tipoVentaSeleccionado = value!;
-                    });
-                  },
-                  validator: (value) {
-                    if (value == null) {
-                      return 'El tipo de venta es obligatorio';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-                DropdownButtonFormField<String>(
-                  value: _categoriaSeleccionada.isNotEmpty
-                      ? _categoriaSeleccionada
-                      : null,
-                  decoration: const InputDecoration(
-                    labelText: 'Categoría',
-                    border: OutlineInputBorder(),
-                  ),
-                  items: _categorias.map((String categoria) {
-                    return DropdownMenuItem<String>(
-                      value: categoria,
-                      child: Text(categoria),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      _categoriaSeleccionada = value!;
-                    });
-                  },
-                  validator: (value) {
-                    if (value == null) {
-                      return 'La categoría es obligatoria';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-                DropdownButtonFormField<String>(
-                  value:
-                      _razaSeleccionada.isNotEmpty ? _razaSeleccionada : null,
-                  decoration: const InputDecoration(
-                    labelText: 'Raza',
-                    border: OutlineInputBorder(),
-                  ),
-                  items: _razas.map((raza) {
-                    return DropdownMenuItem(
-                      value: raza,
-                      child: Text(raza),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      _razaSeleccionada = value!;
-                    });
-                  },
-                  validator: (value) {
-                    if (value == null) {
-                      return 'Por favor seleccione una raza';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-                DropdownButtonFormField<String>(
-                  value: _departamentoSeleccionado.isNotEmpty
-                      ? _departamentoSeleccionado
-                      : null,
-                  decoration: const InputDecoration(
-                    labelText: 'Departamento',
-                    border: OutlineInputBorder(),
-                  ),
-                  items: _departamentos.map((departamento) {
-                    return DropdownMenuItem(
-                      value: departamento,
-                      child: Text(departamento),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      _departamentoSeleccionado = value!;
-                    });
-                  },
-                  validator: (value) {
-                    if (value == null) {
-                      return 'Por favor seleccione un departamento';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-                CustomTextForm(
-                  controller: _municipio,
-                  hintText: "Municipio",
-                  keyboardType: TextInputType.number,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Por favor ingrese el municipio";
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-                CustomTextForm(
-                  controller: _pesoController,
-                  hintText: "Peso promedio (kg)",
-                  keyboardType: TextInputType.number,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Por favor ingrese el peso promedio";
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-                CustomTextForm(
-                  controller: _cantidadController,
-                  hintText: "Cantidad",
-                  keyboardType: TextInputType.number,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Por favor ingrese la cantidad";
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-                CustomTextForm(
-                  controller: _edadController,
-                  hintText: "Edad promedio (meses)",
-                  keyboardType: TextInputType.number,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Por favor ingrese la edad promedio";
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-                CustomTextForm(
-                  controller: _precioController,
-                  hintText: "Precio promedio por cabeza (COP)",
-                  keyboardType: TextInputType.number,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Por favor ingrese el precio promedio";
-                    }
-                    return null;
-                  },
-                ),
-                CheckboxListTile(
-                  title: const Text('¿Negociable?'),
-                  value: _negociable,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      _negociable = value ?? false;
-                    });
-                  },
-                ),
-                SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-                CustomTextForm(
-                  controller: _descripcionController,
-                  hintText: "Descripción",
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Por favor ingrese una descripción";
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 16.0),
-                TextButton.icon(
-                  onPressed: _pickImages,
-                  icon: const Icon(Icons.image),
-                  label: const Text('Seleccionar imágenes'),
-                ),
-                _images.isNotEmpty
-                    ? Wrap(
-                        spacing: 10,
-                        runSpacing: 10,
-                        children: _images
-                            .map((image) => Image.file(
-                                  image,
-                                  width: 100,
-                                  height: 100,
-                                  fit: BoxFit.cover,
-                                ))
-                            .toList(),
-                      )
-                    : const Text('No se han seleccionado imágenes'),
-                const SizedBox(height: 16.0),
-                TextButton.icon(
-                  onPressed: _pickVideo,
-                  icon: const Icon(Icons.video_collection),
-                  label: const Text('Seleccionar video'),
-                ),
-                _video != null
-                    ? Text(
-                        'Video seleccionado: ${_video!.path.split('/').last}')
-                    : const Text('No se ha seleccionado un video'),
-                const SizedBox(height: 16.0),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 249, 188, 99),
-                  ),
-                  onPressed: () async {
-                    _submitForm(context);
-                  },
-                  child: const Text(
-                    'Registrar Ganado',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ],
-            ),
+        appBar: AppBar(
+          toolbarHeight: height * 0.1,
+          centerTitle: true,
+          title: CustomTextSpan(
+            primary: const Color.fromARGB(255, 54, 54, 54),
+            secondary: colorScheme.primary,
+            textPrimary: "Registro de Ganado     Gana",
+            textSecondary: "Gov",
+            sizePrimary: 23,
+            sizeSecondary: 23,
+          ),
+          shape: const UnderlineInputBorder(
+            borderSide:
+                BorderSide(color: Color.fromARGB(255, 17, 163, 3), width: 5),
           ),
         ),
-      ]),
-    );
+        body: ListView(children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                  DropdownButtonFormField<String>(
+                    value: _tipoVentaSeleccionado.isNotEmpty
+                        ? _tipoVentaSeleccionado
+                        : null,
+                    decoration: const InputDecoration(
+                      labelText: 'Tipo de Venta',
+                      border: OutlineInputBorder(),
+                    ),
+                    items: _tiposVenta.map((String tipo) {
+                      return DropdownMenuItem<String>(
+                        value: tipo,
+                        child: Text(tipo),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        _tipoVentaSeleccionado = value!;
+                      });
+                    },
+                    validator: (value) {
+                      if (value == null) {
+                        return 'El tipo de venta es obligatorio';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                  if (_tipoVentaSeleccionado == 'Lote') ...[
+                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                    CustomTextForm(
+                      controller: _pesoController,
+                      hintText: "Peso promedio (kg)",
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Por favor ingrese el peso promedio";
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                    CustomTextForm(
+                      controller: _cantidadController,
+                      hintText: "Cantidad",
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Por favor ingrese la cantidad";
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                  ] else if (_tipoVentaSeleccionado == 'Animal') ...[
+                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                    CustomTextForm(
+                      controller: _pesoController,
+                      hintText: "Peso (kg)",
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Por favor ingrese el peso";
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                  ],
+                  DropdownButtonFormField<String>(
+                    value: _categoriaSeleccionada.isNotEmpty
+                        ? _categoriaSeleccionada
+                        : null,
+                    decoration: const InputDecoration(
+                      labelText: 'Categoría',
+                      border: OutlineInputBorder(),
+                    ),
+                    items: _categorias.map((String categoria) {
+                      return DropdownMenuItem<String>(
+                        value: categoria,
+                        child: Text(categoria),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        _categoriaSeleccionada = value!;
+                      });
+                    },
+                    validator: (value) {
+                      if (value == null) {
+                        return 'La categoría es obligatoria';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                  DropdownButtonFormField<String>(
+                    value:
+                        _razaSeleccionada.isNotEmpty ? _razaSeleccionada : null,
+                    decoration: const InputDecoration(
+                      labelText: 'Raza',
+                      border: OutlineInputBorder(),
+                    ),
+                    items: _razas.map((String raza) {
+                      return DropdownMenuItem<String>(
+                        value: raza,
+                        child: Text(raza),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        _razaSeleccionada = value!;
+                      });
+                    },
+                    validator: (value) {
+                      if (value == null) {
+                        return 'La raza es obligatoria';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                  CustomTextForm(
+                    controller: _edadController,
+                    hintText: "Edad (meses)",
+                    keyboardType: TextInputType.number,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Por favor ingrese la edad";
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                  CustomTextForm(
+                    controller: _precioController,
+                    hintText: "Precio",
+                    keyboardType: TextInputType.number,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Por favor ingrese el precio";
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: CheckboxListTile(
+                          title: const Text('Negociable'),
+                          value: _negociable,
+                          onChanged: (value) {
+                            setState(() {
+                              _negociable = value!;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                  CustomTextForm(
+                    controller: _descripcionController,
+                    hintText: "Descripción",
+                    keyboardType: TextInputType.text,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Por favor ingrese una descripción";
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                  CustomTextForm(
+                    controller: _municipio,
+                    hintText: "Municipio",
+                    keyboardType: TextInputType.text,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Por favor ingrese el municipio";
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                  DropdownButtonFormField<String>(
+                    value: _departamentoSeleccionado.isNotEmpty
+                        ? _departamentoSeleccionado
+                        : null,
+                    decoration: const InputDecoration(
+                      labelText: 'Departamento',
+                      border: OutlineInputBorder(),
+                    ),
+                    items: _departamentos.map((String departamento) {
+                      return DropdownMenuItem<String>(
+                        value: departamento,
+                        child: Text(departamento),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        _departamentoSeleccionado = value!;
+                      });
+                    },
+                    validator: (value) {
+                      if (value == null) {
+                        return 'El departamento es obligatorio';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16.0),
+                  TextButton.icon(
+                    onPressed: _pickImages,
+                    icon: const Icon(Icons.image),
+                    label: const Text('Seleccionar imágenes'),
+                  ),
+                  _images.isNotEmpty
+                      ? Wrap(
+                          spacing: 10,
+                          runSpacing: 10,
+                          children: _images
+                              .map((image) => Image.file(
+                                    image,
+                                    width: 100,
+                                    height: 100,
+                                    fit: BoxFit.cover,
+                                  ))
+                              .toList(),
+                        )
+                      : const Text('No se han seleccionado imágenes'),
+                  const SizedBox(height: 16.0),
+                  TextButton.icon(
+                    onPressed: _pickVideo,
+                    icon: const Icon(Icons.video_collection),
+                    label: const Text('Seleccionar video'),
+                  ),
+                  _video != null
+                      ? Text(
+                          'Video seleccionado: ${_video!.path.split('/').last}')
+                      : const Text('No se ha seleccionado un video'),
+                  const SizedBox(height: 16.0),
+                  SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 249, 188, 99),
+                    ),
+                    onPressed: () async {
+                      _submitForm(context);
+                    },
+                    child: const Text(
+                      'Registrar Ganado',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ]));
   }
 
   Future<List<String>> _uploadImages() async {
