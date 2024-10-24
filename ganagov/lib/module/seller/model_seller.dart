@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 class Sale {
   final String id;
   final String cantidad;
@@ -18,25 +17,26 @@ class Sale {
   final String raza;
   final String telefono;
   final String tipoVenta;
+  final String municipio;
 
-  Sale({
-    required this.id,
-    required this.cantidad,
-    required this.categoria,
-    required this.departamento,
-    required this.descripcion,
-    required this.edad,
-    required this.estado,
-    required this.fecha,
-    required this.fotos,
-    required this.idNumber,
-    required this.negociable,
-    required this.peso,
-    required this.precio,
-    required this.raza,
-    required this.telefono,
-    required this.tipoVenta,
-  });
+  Sale(
+      {required this.id,
+      required this.cantidad,
+      required this.categoria,
+      required this.departamento,
+      required this.descripcion,
+      required this.edad,
+      required this.estado,
+      required this.fecha,
+      required this.fotos,
+      required this.idNumber,
+      required this.negociable,
+      required this.peso,
+      required this.precio,
+      required this.raza,
+      required this.telefono,
+      required this.tipoVenta,
+      required this.municipio});
 
   factory Sale.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
@@ -57,6 +57,7 @@ class Sale {
       raza: data['raza'] ?? '',
       telefono: data['telefono'] ?? '',
       tipoVenta: data['tipoVenta'] ?? '',
+      municipio: data['municipio']??''
     );
   }
 }

@@ -82,6 +82,8 @@ class _MySalesPageState extends State<MySalesPage> {
                           style: const TextStyle(fontSize: 16)),
                       Text('Departamento: ${venta['departamento']}',
                           style: const TextStyle(fontSize: 16)),
+                      Text('Municipio: ${venta['municipio'] ?? ''}',
+                          style: const TextStyle(fontSize: 16)),
                       Text('Edad: ${venta['edad']}',
                           style: const TextStyle(fontSize: 16)),
                       Text('Peso: ${venta['peso']}',
@@ -94,9 +96,9 @@ class _MySalesPageState extends State<MySalesPage> {
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: venta['estado'] == 'VENTA'
+                              color: venta['estado'] == 'En Venta'
                                   ? Colors.orange
-                                  : venta['estado'] == 'CANCELADO'
+                                  : venta['estado'] == 'Cancelado'
                                       ? Colors.red
                                       : Colors.green)),
                       const SizedBox(height: 10),
@@ -119,7 +121,7 @@ class _MySalesPageState extends State<MySalesPage> {
         const Text('Cambiar estado:', style: TextStyle(fontSize: 16)),
         DropdownButton<String>(
           value: venta['estado'],
-          items: ['VENTA', 'VENDIDO', 'CANCELADO']
+          items: ['En Venta', 'Vendido', 'Cancelado']
               .map((String estado) => DropdownMenuItem<String>(
                     value: estado,
                     child: Text(estado),

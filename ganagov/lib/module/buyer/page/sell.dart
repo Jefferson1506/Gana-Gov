@@ -25,6 +25,7 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
   final TextEditingController _precioController = TextEditingController();
   final TextEditingController _cantidadController = TextEditingController();
   final TextEditingController _descripcionController = TextEditingController();
+  final TextEditingController _municipio = TextEditingController();
 
   String _tipoVentaSeleccionado = '';
   String _categoriaSeleccionada = '';
@@ -149,8 +150,9 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
           'descripcion': _descripcionController.text,
           'fotos': imageUrls,
           'video': videoUrl,
-          'estado': 'VENTA',
-          'fecha': dataTime
+          'estado': 'En Venta',
+          'fecha': dataTime,
+          'municipio': _municipio.text
         });
         LoadingDialog.dismissLoadingDialog(context);
         NotifyDialog.showSuccessDialog(context);
@@ -168,15 +170,15 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
     _precioController.clear();
     _cantidadController.clear();
     _descripcionController.clear();
-
+    _municipio.clear;
     setState(() {
       _tipoVentaSeleccionado = '';
       _categoriaSeleccionada = '';
       _razaSeleccionada = '';
       _departamentoSeleccionado = '';
       _negociable = false;
-      _images.clear(); 
-      _video = null; 
+      _images.clear();
+      _video = null;
     });
   }
 
@@ -312,6 +314,18 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
                   validator: (value) {
                     if (value == null) {
                       return 'Por favor seleccione un departamento';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                CustomTextForm(
+                  controller: _municipio,
+                  hintText: "Municipio",
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Por favor ingrese el municipio";
                     }
                     return null;
                   },
