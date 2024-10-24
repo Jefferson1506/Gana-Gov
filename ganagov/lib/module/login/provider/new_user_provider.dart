@@ -41,10 +41,21 @@ class UserProvider extends ChangeNotifier {
       if (userQuery.docs.isNotEmpty) {
         LoadingDialog.dismissLoadingDialog(context);
         NotifyDialog.showWarningDialog(
-            context, "El usuario ya está registrado con este correo.");
+            context, "El usuario ya está registrado con esa numero de identificacion.");
         return;
       }
 
+final QuerySnapshot userQuery1 = await _firestore
+          .collection('Users')
+          .where('User', isEqualTo: usernameController.text)
+          .get();
+
+      if (userQuery1.docs.isNotEmpty) {
+        LoadingDialog.dismissLoadingDialog(context);
+        NotifyDialog.showWarningDialog(
+            context, "El usuario ya está registrado.");
+        return;
+      }
       await _firestore.collection('Users').add({
         'nombre': fullNameController.text,
         'User': usernameController.text,
