@@ -18,6 +18,7 @@ class Sale {
   final String telefono;
   final String tipoVenta;
   final String municipio;
+  final String videoUrl;
 
   Sale(
       {required this.id,
@@ -36,28 +37,29 @@ class Sale {
       required this.raza,
       required this.telefono,
       required this.tipoVenta,
+      required this.videoUrl,
       required this.municipio});
 
   factory Sale.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     return Sale(
-      id: doc.id,
-      cantidad: data['cantidad'] ?? '',
-      categoria: data['categoria'] ?? '',
-      departamento: data['departamento'] ?? '',
-      descripcion: data['descripcion'] ?? '',
-      edad: data['edad'] ?? '',
-      estado: data['estado'] ?? '',
-      fecha: data['fecha'] ?? '',
-      fotos: List<String>.from(data['fotos'] ?? []),
-      idNumber: data['idNumber'] ?? '',
-      negociable: data['negociable'] ?? false,
-      peso: data['peso'] ?? '',
-      precio: data['precio'] ?? '',
-      raza: data['raza'] ?? '',
-      telefono: data['telefono'] ?? '',
-      tipoVenta: data['tipoVenta'] ?? '',
-      municipio: data['municipio']??''
-    );
+        id: doc.id,
+        cantidad: data['cantidad'] ?? '',
+        categoria: data['categoria'] ?? '',
+        departamento: data['departamento'] ?? '',
+        descripcion: data['descripcion'] ?? '',
+        edad: data['edad'] ?? '',
+        estado: data['estado'] ?? '',
+        fecha: data['fecha'] ?? '',
+        fotos: List<String>.from(data['fotos'] ?? []),
+        idNumber: data['idNumber'] ?? '',
+        negociable: data['negociable'] ?? false,
+        peso: data['peso'] ?? '',
+        precio: data['precio'] ?? '',
+        raza: data['raza'] ?? '',
+        telefono: data['telefono'] ?? '',
+        tipoVenta: data['tipoVenta'] ?? '',
+        videoUrl:data['video']??'',
+        municipio: data['municipio'] ?? '');
   }
 }

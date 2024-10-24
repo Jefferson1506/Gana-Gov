@@ -41,6 +41,14 @@ class SaleCard extends StatelessWidget {
                 _buildIcons(),
                 const SizedBox(height: 5),
                 _buildNegotiableInfo(),
+                 const SizedBox(height: 5),
+              Center(
+                child: buildTextIconRow(
+                  icon: Icons.price_change,
+                  text: sale.precio,
+                  color: Colors.grey,
+                ),
+              ),
                 const SizedBox(height: 10),
                 _buildDescription(),
               ],
