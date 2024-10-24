@@ -11,7 +11,7 @@ class StatisticsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 39, 48, 39),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -82,7 +82,7 @@ class StatisticsPage extends StatelessWidget {
           return SfCartesianChart(
             title: const ChartTitle(
                 text: 'Total de Ventas',
-                textStyle: TextStyle(color: Colors.white)),
+                textStyle: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
             primaryXAxis: const CategoryAxis(),
             series: <CartesianSeries>[
               ColumnSeries<dynamic, String>(
@@ -127,7 +127,7 @@ class StatisticsPage extends StatelessWidget {
             ],
             title: const ChartTitle(
                 text: 'Tipos de Ventas',
-                textStyle: TextStyle(color: Colors.white)),
+                textStyle: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
             legend: const Legend(isVisible: true),
             series: <CircularSeries>[
               PieSeries<MapEntry<String, int>, String>(
@@ -175,7 +175,7 @@ class StatisticsPage extends StatelessWidget {
             ],
             title: const ChartTitle(
                 text: 'Precio Promedio de Ventas Global',
-                textStyle: TextStyle(color: Colors.white)),
+                textStyle: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
             primaryXAxis: const CategoryAxis(),
             series: <CartesianSeries>[
               ColumnSeries<dynamic, String>(
@@ -219,7 +219,7 @@ class StatisticsPage extends StatelessWidget {
             ],
             title: const ChartTitle(
                 text: 'Razas Más Vendidas',
-                textStyle: TextStyle(color: Colors.white)),
+                textStyle: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
             primaryXAxis: const CategoryAxis(),
             series: <CartesianSeries>[
               ColumnSeries<MapEntry<String, int>, String>(
@@ -262,7 +262,7 @@ class StatisticsPage extends StatelessWidget {
             ],
             title: const ChartTitle(
                 text: 'Ventas por Departamento',
-                textStyle: TextStyle(color: Colors.white)),
+                textStyle: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
             primaryXAxis: const CategoryAxis(),
             series: <CartesianSeries>[
               ColumnSeries<MapEntry<String, int>, String>(

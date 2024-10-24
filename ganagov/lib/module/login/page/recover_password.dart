@@ -84,7 +84,7 @@ class RecoverPassword extends StatelessWidget {
                             SizedBox(height: height * 0.03),
                             CustomTextForm(
                               controller: provider.email,
-                              hintText: "Correo :",
+                              hintText: "Usuario :",
                               keyboardType: TextInputType.emailAddress,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {

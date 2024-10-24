@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ganagov/global/user_model.dart';
 import 'package:ganagov/global/widgets/backgraound.dart';
 import 'package:ganagov/global/widgets/button.dart';
+import 'package:ganagov/module/login/page/login.dart';
 import 'package:hive/hive.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -29,9 +30,11 @@ class HomeScreen extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              logo(context),
               CustomButton(
                 origin: context,
                 text: "Soy Vendedor",
+                colorText: Colors.black,
                 color: color.primary,
                 onpress: () async {
                   String? role = await getUserRoleFromHive();

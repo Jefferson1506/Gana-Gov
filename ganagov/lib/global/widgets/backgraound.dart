@@ -6,7 +6,7 @@ Widget backgroundDay(BuildContext context) {
   return Stack(
     children: [
       Positioned(
-        bottom: height * 0.03,
+        bottom: height * -0.01,
         left: width * 0.35,
         child: Container(
           width: width * 0.3,

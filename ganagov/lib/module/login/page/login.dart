@@ -35,6 +35,7 @@ class Login extends StatelessWidget {
                   children: [
                     logo(context),
                     CustomTextForm(
+                      iconColor: Colors.black,
                       controller: provider.userController,
                       hintText: "Usuario",
                       keyboardType: TextInputType.emailAddress,
@@ -72,7 +73,7 @@ class Login extends StatelessWidget {
                                     ? const Icon(Icons.visibility_off_outlined)
                                     : const Icon(Icons.visibility_outlined)),
                             prefixIcon: Icon(Icons.lock_clock_sharp,
-                                color: colorScheme.secondary),
+                                color: Colors.black),
                             border: OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: colorScheme.tertiary),
@@ -127,7 +128,7 @@ class Login extends StatelessWidget {
                       child: CustomTextSpan(
                           primary: const Color.fromARGB(255, 54, 54, 54),
                           secondary: colorScheme.primary,
-                          textPrimary: "A un no tienes cuenta?  ",
+                          textPrimary: "No tienes cuenta?  ",
                           textSecondary: "Registrate",
                           sizePrimary: 14,
                           sizeSecondary: 14),
@@ -172,7 +173,7 @@ Widget logo(BuildContext context) {
           child: CustomTextSpan(
               primary: const Color.fromARGB(255, 54, 54, 54),
               secondary: colorScheme.primary,
-              textPrimary: "Gana ",
+              textPrimary: "Gana",
               textSecondary: "Gov",
               sizePrimary: 20,
               sizeSecondary: 20)),

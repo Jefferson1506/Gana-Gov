@@ -24,8 +24,8 @@ class UserProvider extends ChangeNotifier {
     } else {
       filteredUsers = _allUsers
           .where((user) =>
-              user['name'] != null &&
-              user['name'].toLowerCase().contains(query.toLowerCase()))
+              user['nombre'] != null &&
+              user['nombre'].toLowerCase().contains(query.toLowerCase()))
           .toList();
     }
     notifyListeners();
