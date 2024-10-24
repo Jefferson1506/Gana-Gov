@@ -1,3 +1,4 @@
+import 'package:awesome_bottom_bar/widgets/hexagon/hexagon.dart';
 import 'package:flutter/material.dart';
 import 'package:ganagov/global/user_model.dart';
 import 'package:ganagov/global/widgets/backgraound.dart';
@@ -126,19 +127,19 @@ class _PerfilBuyerState extends State<PerfilBuyer> {
           } else {
             await _userBox!.add(_userModel!);
           }
-
+          LoadingDialog.dismissLoadingDialog(context);
           NotifyDialog.showSuccessDialog(context);
         } catch (e) {
+          LoadingDialog.dismissLoadingDialog(context);
           NotifyDialog.showErrorDialog(
               context, "Error al actualizar datos: $e");
         }
       } else {
+        LoadingDialog.dismissLoadingDialog(context);
         NotifyDialog.showErrorDialog(
             context, "El usuario no existe en la base de datos.");
       }
     }
-
-    LoadingDialog.dismissLoadingDialog(context);
   }
 
   Widget _buildCircleAvatar() {
@@ -164,12 +165,15 @@ class _PerfilBuyerState extends State<PerfilBuyer> {
     return Scaffold(
       appBar: AppBar(
         shape: const UnderlineInputBorder(
-          borderSide:
-              BorderSide(color: Color.fromARGB(255, 17, 163, 3), width: 5),
+          borderSide: BorderSide(
+              color: const Color.fromARGB(255, 192, 255, 114), width: 5),
         ),
         toolbarHeight: MediaQuery.sizeOf(context).height * 0.1,
         title: const AutoSizeText(
           "Perfil de Usuario",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
         ),
         actions: [
           IconButton(
@@ -195,32 +199,98 @@ class _PerfilBuyerState extends State<PerfilBuyer> {
                 child: ListView(
                   children: [
                     _buildCircleAvatar(),
-                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
                     Padding(
-                      padding: const EdgeInsets.all(13.0),
-                      child: Container(
-                          alignment: Alignment.center,
+                        padding: const EdgeInsets.all(13.0),
+                        child: Container(
+                          padding: const EdgeInsets.all(5),
+                          alignment: Alignment.centerLeft,
                           decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 218, 218, 218),
                               border: Border.all(color: Colors.black),
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(10))),
                           height: MediaQuery.sizeOf(context).height * 0.07,
                           width: MediaQuery.sizeOf(context).width * 0.03,
-                          child: AutoSizeText(
-                              maxFontSize: 19,
-                              minFontSize: 17,
-                              textAlign: TextAlign.center,
-                              '${_idTypeController.text.toString()} - ${_idNumberController.text.toString()}')),
-                    ),
-                    CustomTextForm(
-                      iconColor: Colors.black,
-                      controller: _nombreController,
-                      hintText: 'Nombre',
-                      prefixIcon: Icons.person,
-                      validator: (value) =>
-                          value!.isEmpty ? 'El nombre es requerido' : null,
-                    ),
-                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                          child: buildTextIconRow(
+                              icon: Icons.document_scanner,
+                              color: Colors.black,
+                              text: 'Cedula  - ${_idNumberController.text}'),
+                        )),
+                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
+                    Padding(
+                        padding: const EdgeInsets.all(13.0),
+                        child: Container(
+                          padding: const EdgeInsets.all(5),
+                          alignment: Alignment.centerLeft,
+                          decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 218, 218, 218),
+                              border: Border.all(color: Colors.black),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10))),
+                          height: MediaQuery.sizeOf(context).height * 0.07,
+                          width: MediaQuery.sizeOf(context).width * 0.03,
+                          child: buildTextIconRow(
+                              icon: Icons.person,
+                              color: Colors.black,
+                              text: 'Nombre - ${_nombreController.text}'),
+                        )),
+                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
+                    Padding(
+                        padding: const EdgeInsets.all(13.0),
+                        child: Container(
+                          padding: const EdgeInsets.all(5),
+                          alignment: Alignment.centerLeft,
+                          decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 218, 218, 218),
+                              border: Border.all(color: Colors.black),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10))),
+                          height: MediaQuery.sizeOf(context).height * 0.07,
+                          width: MediaQuery.sizeOf(context).width * 0.03,
+                          child: buildTextIconRow(
+                              icon: Icons.email,
+                              color: Colors.black,
+                              text: 'Correo - ${_emailController.text}'),
+                        )),
+                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
+                    Padding(
+                        padding: const EdgeInsets.all(13.0),
+                        child: Container(
+                          padding: const EdgeInsets.all(5),
+                          alignment: Alignment.centerLeft,
+                          decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 218, 218, 218),
+                              border: Border.all(color: Colors.black),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10))),
+                          height: MediaQuery.sizeOf(context).height * 0.07,
+                          width: MediaQuery.sizeOf(context).width * 0.03,
+                          child: buildTextIconRow(
+                              icon: Icons.calendar_today_outlined,
+                              color: Colors.black,
+                              text:
+                                  'Fecha nacimiento - ${_fechaController.text}'),
+                        )),
+                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
+                    Padding(
+                        padding: const EdgeInsets.all(13.0),
+                        child: Container(
+                          padding: const EdgeInsets.all(5),
+                          alignment: Alignment.centerLeft,
+                          decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 218, 218, 218),
+                              border: Border.all(color: Colors.black),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10))),
+                          height: MediaQuery.sizeOf(context).height * 0.07,
+                          width: MediaQuery.sizeOf(context).width * 0.03,
+                          child: buildTextIconRow(
+                              icon: Icons.person_outlined,
+                              color: Colors.black,
+                              text: 'Sexo - ${_sexoController.text}'),
+                        )),
+                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.03),
                     CustomTextForm(
                       iconColor: Colors.black,
                       controller: _usernameController,
@@ -229,36 +299,7 @@ class _PerfilBuyerState extends State<PerfilBuyer> {
                       validator: (value) =>
                           value!.isEmpty ? 'El usuario es requerido' : null,
                     ),
-                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-                    CustomTextForm(
-                      iconColor: Colors.black,
-                      controller: _emailController,
-                      hintText: 'Correo',
-                      prefixIcon: Icons.email,
-                      validator: (value) =>
-                          value!.isEmpty ? 'El correo es requerido' : null,
-                      keyboardType: TextInputType.emailAddress,
-                    ),
-                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-                    CustomTextForm(
-                      iconColor: Colors.black,
-                      controller: _fechaController,
-                      hintText: 'Fecha de Registro',
-                      prefixIcon: Icons.calendar_today,
-                      validator: (value) =>
-                          value!.isEmpty ? 'La fecha es requerida' : null,
-                      keyboardType: TextInputType.datetime,
-                    ),
-                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-                    CustomTextForm(
-                      iconColor: Colors.black,
-                      controller: _sexoController,
-                      hintText: 'Sexo',
-                      prefixIcon: Icons.person_outline,
-                      validator: (value) =>
-                          value!.isEmpty ? 'El sexo es requerido' : null,
-                    ),
-                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.05),
                     CustomTextForm(
                       iconColor: Colors.black,
                       controller: _telefonoController,
@@ -269,26 +310,47 @@ class _PerfilBuyerState extends State<PerfilBuyer> {
                       keyboardType: TextInputType.phone,
                     ),
                     SizedBox(height: MediaQuery.sizeOf(context).height * 0.03),
-                    SizedBox(
-                      width: MediaQuery.sizeOf(context).height * 0.03,
+                    Padding(
+                      padding: const EdgeInsets.all(40.0),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
+                          
+                          shape: const RoundedRectangleBorder(
+                            side: BorderSide(color: Colors.black),
+                            borderRadius: BorderRadius.all(Radius.circular(10))),
                           backgroundColor:
                               const Color.fromARGB(255, 249, 188, 99),
                         ),
                         child: const Text(
                           'Guardar Cambios',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.black),
                         ),
                         onPressed: () async {
                           await updateUserData(context);
                         },
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
             ]),
     );
   }
+}
+
+Widget buildTextIconRow(
+    {required String text, IconData? icon, required Color color}) {
+  return TextButton.icon(
+    onPressed: () {},
+    icon: icon != null
+        ? Icon(icon, color: Colors.black, size: 16)
+        : const SizedBox(),
+    label: AutoSizeText(
+      text,
+      style: TextStyle(
+        fontSize: 15,
+        color: color,
+      ),
+    ),
+  );
 }

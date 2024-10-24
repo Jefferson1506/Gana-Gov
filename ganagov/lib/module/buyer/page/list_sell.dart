@@ -31,14 +31,14 @@ class _MySalesPageState extends State<MySalesPage> {
         title: CustomTextSpan(
           primary: const Color.fromARGB(255, 54, 54, 54),
           secondary: colorScheme.primary,
-          textPrimary: "Mis Ventas de Ganado    Gana",
+          textPrimary: "Mis Publicaciones    Gana",
           textSecondary: "Gov",
           sizePrimary: 23,
           sizeSecondary: 23,
         ),
         shape: const UnderlineInputBorder(
-          borderSide:
-              BorderSide(color: Color.fromARGB(255, 17, 163, 3), width: 5),
+          borderSide: BorderSide(
+              color: const Color.fromARGB(255, 192, 255, 114), width: 5),
         ),
       ),
       body: StreamBuilder(

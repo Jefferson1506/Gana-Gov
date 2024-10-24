@@ -33,7 +33,7 @@ class _HomeBuyerState extends State<HomeBuyer> {
           ),
           TabItem(
             icon: Icons.sell,
-            title: 'Formulario',
+            title: 'Vender',
           ),
           TabItem(
             icon: Icons.list,
@@ -41,7 +41,7 @@ class _HomeBuyerState extends State<HomeBuyer> {
           ),
         ],
         backgroundColor: colorScheme.primary,
-        color: const Color.fromARGB(255, 255, 255, 255),
+        color: const Color.fromARGB(255, 0, 0, 0),
         colorSelected: Colors.orange,
         indexSelected: _currentIndex,
         onTap: (int index) {

@@ -58,17 +58,29 @@ class DetailViewPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ElevatedButton(
+                  ElevatedButton.icon(
+                    icon: const Icon(
+                      Icons.message,
+                      color: Colors.white,
+                    ),
                     onPressed: () => _openWhatsApp(sale.telefono),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green.shade800,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 25, vertical: 10),
-                      textStyle: const TextStyle(fontSize: 18),
+                      textStyle:
+                          const TextStyle(fontSize: 18, color: Colors.white),
                     ),
-                    child: const Text('WhatsApp'),
+                    label: const Text(
+                      'WhatsApp',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
-                  ElevatedButton(
+                  ElevatedButton.icon(
+                    icon: const Icon(
+                      Icons.phone_forwarded,
+                      color: Colors.white,
+                    ),
                     onPressed: () => _callNumber(sale.telefono),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue.shade800,
@@ -76,7 +88,10 @@ class DetailViewPage extends StatelessWidget {
                           horizontal: 25, vertical: 10),
                       textStyle: const TextStyle(fontSize: 18),
                     ),
-                    child: const Text('Llamar'),
+                    label: const Text(
+                      'Llamar',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ],
               ),

@@ -12,6 +12,7 @@ class SaleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: const Color.fromARGB(255, 250, 255, 220),
       elevation: 6,
       margin: const EdgeInsets.all(10),
       shape: RoundedRectangleBorder(
