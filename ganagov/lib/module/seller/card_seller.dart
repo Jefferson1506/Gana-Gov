@@ -1,4 +1,3 @@
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:ganagov/module/seller/detalle.dart';
@@ -42,16 +41,14 @@ class SaleCard extends StatelessWidget {
                 _buildIcons(),
                 const SizedBox(height: 5),
                 _buildNegotiableInfo(),
-                 const SizedBox(height: 5),
-              Center(
-                child: buildTextIconRow(
-                  icon: Icons.price_change,
-                  text: sale.precio,
-                  color: Colors.grey,
+                const SizedBox(height: 5),
+                Center(
+                  child: buildTextIconRow(
+                    icon: Icons.price_change,
+                    text: sale.precio,
+                    color: Colors.grey,
+                  ),
                 ),
-              ),
-                const SizedBox(height: 10),
-                _buildDescription(),
               ],
             ),
           ),
@@ -191,8 +188,8 @@ class SaleCard extends StatelessWidget {
             )),
         TextButton.icon(
             onPressed: () {},
-            icon:
-                const Icon(Icons.handshake_outlined, color: Colors.black, size: 16),
+            icon: const Icon(Icons.handshake_outlined,
+                color: Colors.black, size: 16),
             label: AutoSizeText(
               sale.negociable ? 'Si Negociable' : 'No Negociable',
               style: TextStyle(
@@ -200,36 +197,6 @@ class SaleCard extends StatelessWidget {
                 color: sale.negociable ? Colors.green : Colors.red,
               ),
             )),
-      ],
-    );
-  }
-
-  Widget _buildDescription() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Descripción',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
-        ),
-        const SizedBox(height: 5),
-        Container(
-          padding: const EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
-            color: Colors.green.shade900,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Text(
-            sale.descripcion,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-            ),
-          ),
-        ),
       ],
     );
   }
