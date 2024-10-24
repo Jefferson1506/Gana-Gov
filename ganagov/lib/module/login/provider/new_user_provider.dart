@@ -3,18 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:ganagov/global/widgets/loanding.dart';
 import 'package:ganagov/global/widgets/notify_dialog.dart';
 import 'package:intl/intl.dart';
+
 class UserProvider extends ChangeNotifier {
-
-
-
-  
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController birthdateController = TextEditingController();
-  String? selectedIdType; 
-  String? selectedGender; 
+  String? selectedIdType;
+  String? selectedGender;
   final TextEditingController idNumberController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -27,13 +24,27 @@ class UserProvider extends ChangeNotifier {
 
   Future<void> registerUser(BuildContext context) async {
     LoadingDialog.showLoadingDialog(context);
+
     if (!key.currentState!.validate()) {
       LoadingDialog.dismissLoadingDialog(context);
-      NotifyDialog.showWarningDialog(context, "Todos los campos son obligatorios.");
+      NotifyDialog.showWarningDialog(
+          context, "Todos los campos son obligatorios.");
       return;
     }
 
     try {
+      final QuerySnapshot userQuery = await _firestore
+          .collection('Users')
+          .where('idNumber', isEqualTo: idNumberController.text)
+          .get();
+
+      if (userQuery.docs.isNotEmpty) {
+        LoadingDialog.dismissLoadingDialog(context);
+        NotifyDialog.showWarningDialog(
+            context, "El usuario ya está registrado con este correo.");
+        return;
+      }
+
       await _firestore.collection('Users').add({
         'nombre': fullNameController.text,
         'User': usernameController.text,
@@ -53,7 +64,8 @@ class UserProvider extends ChangeNotifier {
       NotifyDialog.showSuccessDialog(context);
     } catch (e) {
       LoadingDialog.dismissLoadingDialog(context);
-      NotifyDialog.showErrorDialog(context, "Error al registrar el usuario: ${e.toString()}");
+      NotifyDialog.showErrorDialog(
+          context, "Error al registrar el usuario: ${e.toString()}");
     }
   }
 
@@ -92,8 +104,4 @@ class UserProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-
-  
 }
-
-
