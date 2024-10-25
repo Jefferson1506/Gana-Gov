@@ -19,6 +19,7 @@ class Sale {
   final String tipoVenta;
   final String municipio;
   final String videoUrl;
+  final String sexo;
 
   Sale(
       {required this.id,
@@ -38,11 +39,13 @@ class Sale {
       required this.telefono,
       required this.tipoVenta,
       required this.videoUrl,
+      required this.sexo,
       required this.municipio});
 
   factory Sale.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     return Sale(
+        sexo: data['sexo'] ?? '',
         id: doc.id,
         cantidad: data['cantidad'] ?? '',
         categoria: data['categoria'] ?? '',
@@ -59,7 +62,7 @@ class Sale {
         raza: data['raza'] ?? '',
         telefono: data['telefono'] ?? '',
         tipoVenta: data['tipoVenta'] ?? '',
-        videoUrl:data['video']??'',
+        videoUrl: data['video'] ?? '',
         municipio: data['municipio'] ?? '');
   }
 }

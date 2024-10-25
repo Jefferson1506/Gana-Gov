@@ -31,6 +31,7 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
   String _categoriaSeleccionada = '';
   String _razaSeleccionada = '';
   String _departamentoSeleccionado = '';
+  String _sexoSeleccionado = '';
   bool _negociable = false;
   List<File> _images = [];
   File? _video;
@@ -38,6 +39,8 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
   List<String> _razas = [];
   final List<String> _categorias = ['Lechero', 'De Carne', 'Doble Propósito'];
   final List<String> _tiposVenta = ['Animal', 'Lote'];
+  final List<String> _tiposSexoUni = ['Macho', 'Hembra'];
+  final List<String> _tiposSexoLote = ['Macho', 'Hembra', 'Mixto'];
   final List<String> _departamentos = [
     'Amazonas',
     'Antioquia',
@@ -153,7 +156,8 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
           'video': videoUrl,
           'estado': 'En Venta',
           'fecha': dataTime,
-          'municipio': _municipio.text
+          'municipio': _municipio.text,
+          'sexo': _sexoSeleccionado
         });
 
         LoadingDialog.dismissLoadingDialog(context);
@@ -180,6 +184,7 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
       _razaSeleccionada = '';
       _departamentoSeleccionado = '';
       _negociable = false;
+      _sexoSeleccionado = '';
       _images.clear();
       _video = null;
     });
@@ -203,8 +208,8 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
             sizeSecondary: 23,
           ),
           shape: const UnderlineInputBorder(
-            borderSide:
-                BorderSide(color: const Color.fromARGB(255, 192, 255, 114), width: 5),
+            borderSide: BorderSide(
+                color: const Color.fromARGB(255, 192, 255, 114), width: 5),
           ),
         ),
         body: ListView(children: [
@@ -244,6 +249,33 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
                   SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
                   if (_tipoVentaSeleccionado == 'Lote') ...[
                     SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                    DropdownButtonFormField<String>(
+                      value: _sexoSeleccionado.isNotEmpty
+                          ? _sexoSeleccionado
+                          : null,
+                      decoration: const InputDecoration(
+                        labelText: 'Sexo Lote',
+                        border: OutlineInputBorder(),
+                      ),
+                      items: _tiposSexoLote.map((String tipo) {
+                        return DropdownMenuItem<String>(
+                          value: tipo,
+                          child: Text(tipo),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          _sexoSeleccionado = value!;
+                        });
+                      },
+                      validator: (value) {
+                        if (value == null) {
+                          return 'El sexo de venta es obligatorio';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
                     CustomTextForm(
                       controller: _pesoController,
                       hintText: "Peso promedio (kg)",
@@ -269,6 +301,33 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
                     ),
                     SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
                   ] else if (_tipoVentaSeleccionado == 'Animal') ...[
+                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                    DropdownButtonFormField<String>(
+                      value: _sexoSeleccionado.isNotEmpty
+                          ? _sexoSeleccionado
+                          : null,
+                      decoration: const InputDecoration(
+                        labelText: 'Sexo',
+                        border: OutlineInputBorder(),
+                      ),
+                      items: _tiposSexoUni.map((String tipo) {
+                        return DropdownMenuItem<String>(
+                          value: tipo,
+                          child: Text(tipo),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          _sexoSeleccionado = value!;
+                        });
+                      },
+                      validator: (value) {
+                        if (value == null) {
+                          return 'El sexo de venta es obligatorio';
+                        }
+                        return null;
+                      },
+                    ),
                     SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
                     CustomTextForm(
                       controller: _pesoController,

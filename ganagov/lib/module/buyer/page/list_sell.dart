@@ -74,6 +74,9 @@ class _MySalesPageState extends State<MySalesPage> {
                       Text('Fecha: ${venta['fecha']}',
                           style: const TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold)),
+                      // ignore: prefer_interpolation_to_compose_strings
+                      Text('Sexo:  ' + venta['sexo'],
+                          style: const TextStyle(fontSize: 16)),
                       Text('Cantidad: ${venta['cantidad']}',
                           style: const TextStyle(
                             fontSize: 16,

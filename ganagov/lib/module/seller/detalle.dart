@@ -161,6 +161,13 @@ class SaleCard extends StatelessWidget {
               _buildIcons(),
               const SizedBox(height: 5),
               _buildNegotiableInfo(),
+              Center(
+                child: buildTextIconRow(
+                  icon: Icons.tag_outlined,
+                  text: 'Sexo - ${sale.sexo}',
+                  color: Colors.grey,
+                ),
+              ),
               const SizedBox(height: 5),
               Center(
                 child: buildTextIconRow(

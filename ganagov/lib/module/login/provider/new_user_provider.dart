@@ -40,12 +40,12 @@ class UserProvider extends ChangeNotifier {
 
       if (userQuery.docs.isNotEmpty) {
         LoadingDialog.dismissLoadingDialog(context);
-        NotifyDialog.showWarningDialog(
-            context, "El usuario ya está registrado con esa numero de identificacion.");
+        NotifyDialog.showWarningDialog(context,
+            "El usuario ya está registrado con esa numero de identificacion.");
         return;
       }
 
-final QuerySnapshot userQuery1 = await _firestore
+      final QuerySnapshot userQuery1 = await _firestore
           .collection('Users')
           .where('User', isEqualTo: usernameController.text)
           .get();
