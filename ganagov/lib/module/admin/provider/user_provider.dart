@@ -1,12 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:ganagov/global/user_model.dart';
+import 'package:hive/hive.dart';
 
 class UserProvider extends ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   List<Map<String, dynamic>> _allUsers = [];
   List<Map<String, dynamic>> filteredUsers = [];
+  bool superAdmin = false;
+
+  Future<void> statusAdminh() async {
+    final box = Hive.box<UserModel>('users');
+
+    if (box.isNotEmpty) {
+      UserModel user = box.getAt(0)!;
+
+      superAdmin = user.superAdmin ?? false;
+      notifyListeners();
+    }
+  }
 
   Future<void> fetchUsers() async {
+    statusAdminh();
+
     final snapshot = await _firestore.collection('Users').get();
     _allUsers = snapshot.docs.map((doc) {
       final data = doc.data();

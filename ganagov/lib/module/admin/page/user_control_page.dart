@@ -79,12 +79,15 @@ class UserListWithFilter extends StatelessWidget {
                             'Correo:${user['correo']} - Estado:${user['Estado']} - Rol:${user['rol']}  ',
                             maxFontSize: 15,
                           ),
-                          trailing: IconButton(
-                            icon: const Icon(Icons.delete, color: Colors.red),
-                            onPressed: () {
-                              provider.deleteUser(user['id']);
-                            },
-                          ),
+                          trailing: provider.superAdmin == true
+                              ? IconButton(
+                                  icon: const Icon(Icons.delete,
+                                      color: Colors.red),
+                                  onPressed: () {
+                                    provider.deleteUser(user['id']);
+                                  },
+                                )
+                              : null,
                           onTap: () =>
                               _showUpdateDialog(context, provider, user),
                         ),
