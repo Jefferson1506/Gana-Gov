@@ -144,7 +144,7 @@ class RecoverPassword extends StatelessWidget {
                             ),
                             SizedBox(height: height * 0.03),
                             AutoSizeText(
-                              'Escribe su nueva contraseña, Min 4 - Max 8',
+                              'Escribe su nueva contraseña, Min 8 - Max 16',
                               style: TextStyle(
                                 fontSize: 13,
                                 color: Colors.grey[600],
@@ -160,7 +160,8 @@ class RecoverPassword extends StatelessWidget {
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Por favor el campo es obligatorio';
-                                } else if (value.length <= 3) {
+                                } else if (value.length < 4 &&
+                                    value.length > 16) {
                                   return 'Contraseña invalida';
                                 }
                                 return null;
