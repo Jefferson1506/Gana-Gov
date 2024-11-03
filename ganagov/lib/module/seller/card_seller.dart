@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:ganagov/module/seller/detalle.dart';
 import 'package:ganagov/module/seller/model_seller.dart';
+import 'package:intl/intl.dart';
 
 class SaleCard extends StatelessWidget {
   final Sale sale;
@@ -53,7 +54,7 @@ class SaleCard extends StatelessWidget {
                 Center(
                   child: buildTextIconRow(
                     icon: Icons.price_change,
-                    text: sale.precio,
+                    text: formatCurrency(double.tryParse(sale.precio) ?? 0),
                     color: Colors.grey,
                   ),
                 ),
@@ -208,4 +209,13 @@ class SaleCard extends StatelessWidget {
       ],
     );
   }
+}
+
+String formatCurrency(double amount) {
+  final formatter = NumberFormat.currency(
+    locale: 'es_CO',
+    symbol: '\$',
+    decimalDigits: 0,
+  );
+  return formatter.format(amount);
 }

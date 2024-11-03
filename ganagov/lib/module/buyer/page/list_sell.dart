@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ganagov/global/user_model.dart';
 import 'package:ganagov/global/widgets/text_span.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/intl.dart';
 
 class MySalesPage extends StatefulWidget {
   @override
@@ -91,7 +92,8 @@ class _MySalesPageState extends State<MySalesPage> {
                           style: const TextStyle(fontSize: 16)),
                       Text('Peso: ${venta['peso']}',
                           style: const TextStyle(fontSize: 16)),
-                      Text('Precio: ${venta['precio']}',
+                      Text(
+                          'Precio: ${formatCurrency(double.tryParse(venta['precio']) ?? 0)}',
                           style: const TextStyle(fontSize: 16)),
                       Text('Descripción: ${venta['descripcion']}',
                           style: const TextStyle(fontSize: 16)),
@@ -154,4 +156,13 @@ class _MySalesPageState extends State<MySalesPage> {
       );
     }
   }
+}
+
+String formatCurrency(double amount) {
+  final formatter = NumberFormat.currency(
+    locale: 'es_CO',
+    symbol: '\$',
+    decimalDigits: 0,
+  );
+  return formatter.format(amount);
 }

@@ -7,6 +7,7 @@ import 'package:ganagov/module/seller/model_seller.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:video_player/video_player.dart';
+import 'package:intl/intl.dart';
 
 class DetailViewPage extends StatelessWidget {
   final Sale sale;
@@ -172,7 +173,7 @@ class SaleCard extends StatelessWidget {
               Center(
                 child: buildTextIconRow(
                   icon: Icons.price_change,
-                  text: sale.precio,
+                  text: formatCurrency(double.tryParse(sale.precio) ?? 0),
                   color: Colors.grey,
                 ),
               ),
@@ -447,4 +448,13 @@ class _ControlsOverlay extends StatelessWidget {
       ],
     );
   }
+}
+
+String formatCurrency(double amount) {
+  final formatter = NumberFormat.currency(
+    locale: 'es_CO',
+    symbol: '\$',
+    decimalDigits: 0,
+  );
+  return formatter.format(amount);
 }
