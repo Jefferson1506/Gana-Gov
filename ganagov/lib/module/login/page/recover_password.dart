@@ -160,7 +160,7 @@ class RecoverPassword extends StatelessWidget {
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Por favor el campo es obligatorio';
-                                } else if (value.length < 4 &&
+                                } else if (value.length < 4 ||
                                     value.length > 16) {
                                   return 'Contraseña invalida';
                                 }

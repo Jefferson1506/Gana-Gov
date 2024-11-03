@@ -97,7 +97,7 @@ class NewUser extends StatelessWidget {
                           ),
                           const SizedBox(height: 16),
                           SizedBox(
-                             width: MediaQuery.sizeOf(context).width*0.84,
+                            width: MediaQuery.sizeOf(context).width * 0.84,
                             child: DropdownButtonFormField<String>(
                               value: provider.selectedIdType,
                               decoration: const InputDecoration(
@@ -128,7 +128,11 @@ class NewUser extends StatelessWidget {
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'El número de identificación es obligatorio';
+                              } else if (value.length < 6 ||
+                                  value.length > 10) {
+                                return 'El número de identificación es invalido';
                               }
+
                               return null;
                             },
                           ),
@@ -146,7 +150,7 @@ class NewUser extends StatelessWidget {
                           ),
                           const SizedBox(height: 16),
                           SizedBox(
-                            width: MediaQuery.sizeOf(context).width*0.84,
+                            width: MediaQuery.sizeOf(context).width * 0.84,
                             child: DropdownButtonFormField<String>(
                               value: provider.selectedGender,
                               decoration: const InputDecoration(
@@ -190,7 +194,8 @@ class NewUser extends StatelessWidget {
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'La contraseña es obligatoria';
-                              } else if (value.length < 8 && value.length > 8) {
+                              } else if (value.length < 8 ||
+                                  value.length > 16) {
                                 return 'La contraseña debe tener al menos 8 a 16 caracteres';
                               }
                               return null;
