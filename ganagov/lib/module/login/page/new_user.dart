@@ -183,6 +183,12 @@ class NewUser extends StatelessWidget {
                               if (value == null || value.isEmpty) {
                                 return 'El correo electrónico es obligatorio';
                               }
+
+                              final emailRegex =
+                                  RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                              if (!emailRegex.hasMatch(value)) {
+                                return 'Por favor, ingrese un correo electrónico válido';
+                              }
                               return null;
                             },
                           ),
