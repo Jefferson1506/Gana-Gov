@@ -74,7 +74,7 @@ class RecoverPassword extends StatelessWidget {
                             ),
                             SizedBox(height: height * 0.03),
                             AutoSizeText(
-                              'Escribe tu usuario para formatear tu contraseña.',
+                              'Escribe tu correo para formatear tu contraseña.',
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey[600],
@@ -84,7 +84,7 @@ class RecoverPassword extends StatelessWidget {
                             SizedBox(height: height * 0.03),
                             CustomTextForm(
                               controller: provider.email,
-                              hintText: "Usuario :",
+                              hintText: "Correo :",
                               keyboardType: TextInputType.emailAddress,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
