@@ -58,7 +58,7 @@ class HomeScreen extends StatelessWidget {
               CustomButton(
                 origin: context,
                 text: "Soy Comprador",
-                colorText: Colors.white,
+                colorText: Colors.black,
                 color: color.secondary,
                 onpress: () => Navigator.pushNamed(context, "home_seller"),
               ),

@@ -39,7 +39,7 @@ class _MySalesPageState extends State<MySalesPage> {
         ),
         shape: const UnderlineInputBorder(
           borderSide: BorderSide(
-              color: const Color.fromARGB(255, 165,217,24), width: 5),
+              color: const Color.fromARGB(255, 165, 217, 24), width: 5),
         ),
       ),
       body: StreamBuilder(
@@ -100,8 +100,7 @@ class _MySalesPageState extends State<MySalesPage> {
                                   ? Colors.green
                                   : Colors.red)),
 
-                      Text(
-                          'Negociable: ${boolToYesNo(venta['vacuna'] ?? false)}',
+                      Text('Vacuna: ${boolToYesNo(venta['vacuna'] ?? false)}',
                           style: TextStyle(
                               fontSize: 16,
                               color: venta['vacuna'] == true
