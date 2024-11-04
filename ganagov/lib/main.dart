@@ -52,7 +52,7 @@ ThemeData colorScheme() {
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
         seedColor: const Color.fromARGB(255, 244, 244, 244),
-        primary: const Color.fromARGB(255, 192, 255, 114),
+        primary: const Color.fromARGB(255, 165, 217, 24),
         secondary: const Color.fromARGB(255, 249, 188, 99),
         tertiary: const Color.fromARGB(255, 54, 54, 54),
         surface: const Color.fromARGB(255, 244, 244, 244),
