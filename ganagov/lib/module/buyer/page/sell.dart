@@ -33,6 +33,7 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
   String _departamentoSeleccionado = '';
   String _sexoSeleccionado = '';
   bool _negociable = false;
+  bool _vacuna = false;
   List<File> _images = [];
   File? _video;
   final ImagePicker _picker = ImagePicker();
@@ -149,6 +150,7 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
           'edad': _edadController.text,
           'precio': _precioController.text,
           'negociable': _negociable,
+          'vacuna': _vacuna,
           'cantidad':
               _tipoVentaSeleccionado == 'Lote' ? _cantidadController.text : '1',
           'descripcion': _descripcionController.text,
@@ -184,6 +186,7 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
       _razaSeleccionada = '';
       _departamentoSeleccionado = '';
       _negociable = false;
+      _vacuna = false;
       _sexoSeleccionado = '';
       _images.clear();
       _video = null;
@@ -436,6 +439,23 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
                     ],
                   ),
                   SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: CheckboxListTile(
+                          title: const Text('Vacunas al día'),
+                          value: _vacuna,
+                          onChanged: (value) {
+                            setState(() {
+                              _vacuna = value!;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
                   CustomTextForm(
                     controller: _descripcionController,
                     hintText: "Descripción",
@@ -521,6 +541,9 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 249, 188, 99),
+                      shape: const RoundedRectangleBorder(
+                          side: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
                     ),
                     onPressed: () async {
                       _submitForm(context);
