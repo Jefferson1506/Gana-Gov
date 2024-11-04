@@ -170,13 +170,6 @@ class SaleCard extends StatelessWidget {
                   color: Colors.grey,
                 ),
               ),
-              Center(
-                child: buildTextIconRow(
-                  icon: Icons.tag_outlined,
-                  text: 'Sexo - ${sale.sexo}',
-                  color: Colors.grey,
-                ),
-              ),
               const SizedBox(height: 5),
               Center(
                 child: buildTextIconRow(
