@@ -20,6 +20,7 @@ class Sale {
   final String municipio;
   final String videoUrl;
   final String sexo;
+  final bool vacuna;
 
   Sale(
       {required this.id,
@@ -40,6 +41,7 @@ class Sale {
       required this.tipoVenta,
       required this.videoUrl,
       required this.sexo,
+      required this.vacuna,
       required this.municipio});
 
   factory Sale.fromFirestore(DocumentSnapshot doc) {
@@ -47,6 +49,7 @@ class Sale {
     return Sale(
         sexo: data['sexo'] ?? '',
         id: doc.id,
+        vacuna: data['vacuna']??false,
         cantidad: data['cantidad'] ?? '',
         categoria: data['categoria'] ?? '',
         departamento: data['departamento'] ?? '',

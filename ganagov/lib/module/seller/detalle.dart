@@ -3,6 +3,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:ganagov/global/widgets/text_span.dart';
+import 'package:ganagov/module/buyer/page/list_sell.dart';
 import 'package:ganagov/module/seller/model_seller.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
@@ -167,6 +168,21 @@ class SaleCard extends StatelessWidget {
                   icon: Icons.tag_outlined,
                   text: 'Sexo - ${sale.sexo}',
                   color: Colors.grey,
+                ),
+              ),
+              Center(
+                child: buildTextIconRow(
+                  icon: Icons.tag_outlined,
+                  text: 'Sexo - ${sale.sexo}',
+                  color: Colors.grey,
+                ),
+              ),
+              const SizedBox(height: 5),
+              Center(
+                child: buildTextIconRow(
+                  icon: Icons.tag_outlined,
+                  text: 'Vacunas al día - ${boolToYesNo(sale.vacuna)}',
+                  color: sale.vacuna == true ? Colors.green : Colors.red,
                 ),
               ),
               const SizedBox(height: 5),

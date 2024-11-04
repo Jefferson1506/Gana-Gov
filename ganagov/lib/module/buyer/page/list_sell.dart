@@ -93,8 +93,21 @@ class _MySalesPageState extends State<MySalesPage> {
                       Text('Peso: ${venta['peso']}',
                           style: const TextStyle(fontSize: 16)),
                       Text(
-                          'Precio: ${formatCurrency(double.tryParse(venta['precio']) ?? 0)}',
-                          style: const TextStyle(fontSize: 16)),
+                          'Negociable: ${boolToYesNo(venta['negociable'] ?? false)}',
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: venta['negociable'] == true
+                                  ? Colors.green
+                                  : Colors.red)),
+
+                      Text(
+                          'Negociable: ${boolToYesNo(venta['vacuna'] ?? false)}',
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: venta['vacuna'] == true
+                                  ? Colors.green
+                                  : Colors.red)),
+
                       Text('Descripción: ${venta['descripcion']}',
                           style: const TextStyle(fontSize: 16)),
                       Text('Estado: ${venta['estado']}',
@@ -165,4 +178,8 @@ String formatCurrency(double amount) {
     decimalDigits: 0,
   );
   return formatter.format(amount);
+}
+
+String boolToYesNo(bool value) {
+  return value ? 'Sí' : 'No';
 }
