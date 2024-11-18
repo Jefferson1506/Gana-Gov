@@ -49,7 +49,7 @@ class RecoverPassword extends StatelessWidget {
                       child: Container(
                         padding: const EdgeInsets.all(10),
                         width: width * 0.8,
-                        height: height * 0.4,
+                        height: height * 0.45,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(15),
@@ -93,7 +93,19 @@ class RecoverPassword extends StatelessWidget {
                                 return null;
                               },
                             ),
-                            SizedBox(height: height * 0.04),
+                              SizedBox(height: height * 0.02),
+                               CustomTextForm(
+                              controller: provider.code,
+                              hintText: "Codigo de seguridad :",
+                              keyboardType: TextInputType.emailAddress,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Por favor el campo es obligatorio';
+                                }
+                                return null;
+                              },
+                            ),
+                            SizedBox(height: height * 0.03),
                             ElevatedButton(
                               onPressed: () => provider.changePassword(context),
                               style: ElevatedButton.styleFrom(

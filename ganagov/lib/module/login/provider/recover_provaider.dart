@@ -7,6 +7,7 @@ class RecoverProvider extends ChangeNotifier {
   bool visibilyPassword = false;
 
   TextEditingController email = TextEditingController();
+  TextEditingController code = TextEditingController();
   TextEditingController newPassword1 = TextEditingController();
   TextEditingController newPassword2 = TextEditingController();
 
@@ -28,21 +29,27 @@ class RecoverProvider extends ChangeNotifier {
       LoadingDialog.showLoadingDialog(context);
 
       String enteredEmail = email.text.trim();
+      String enteredCode = code.text.trim();
 
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
           .collection('Users')
           .where('correo', isEqualTo: enteredEmail)
           .get();
 
+      QuerySnapshot querySnapshot1 = await FirebaseFirestore.instance
+          .collection('Users')
+          .where('codigo', isEqualTo: enteredCode)
+          .get();
+
       LoadingDialog.dismissLoadingDialog(context);
 
-      if (querySnapshot.docs.isNotEmpty) {
+      if (querySnapshot.docs.isNotEmpty && querySnapshot1.docs.isNotEmpty) {
         visibilityWidget();
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
               backgroundColor: Colors.red,
-              content: Text("Correo no encontrado")),
+              content: Text("Correo y/o codigo no encontrado")),
         );
       }
     } catch (e) {
