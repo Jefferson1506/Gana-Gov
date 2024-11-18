@@ -16,7 +16,7 @@ class UserProvider extends ChangeNotifier {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
+  final TextEditingController codeController = TextEditingController();
   final GlobalKey<FormState> key = GlobalKey();
 
   final List<String> idTypes = ['DNI', 'Pasaporte', 'Cédula', 'Otro'];
@@ -67,7 +67,8 @@ class UserProvider extends ChangeNotifier {
         'correo': emailController.text,
         'clave': passwordController.text,
         'Estado': 'NO',
-        'rol': 'USER'
+        'rol': 'USER',
+        'codigo': codeController.text.toString().trim()
       });
 
       clearControllers();
@@ -90,6 +91,7 @@ class UserProvider extends ChangeNotifier {
     selectedGender = null;
     emailController.clear();
     passwordController.clear();
+    codeController.clear;
     notifyListeners();
   }
 

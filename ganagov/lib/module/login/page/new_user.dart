@@ -207,6 +207,22 @@ class NewUser extends StatelessWidget {
                               return null;
                             },
                           ),
+                              const SizedBox(height: 16),
+                          CustomTextForm(
+                            keyboardType: TextInputType.number,
+                            controller: provider.codeController,
+                            hintText: 'Codigo de seguridad Max - 4',
+                            isPassword: false,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'El codigo es obligatorio';
+                              } else if (
+                                  value.length > 4) {
+                                return 'El codigo debe tener maximo 4 digitos';
+                              }
+                              return null;
+                            },
+                          ),
                           const SizedBox(height: 20),
                           ElevatedButton(
                             onPressed: () {
