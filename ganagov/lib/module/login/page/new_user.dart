@@ -207,7 +207,7 @@ class NewUser extends StatelessWidget {
                               return null;
                             },
                           ),
-                              const SizedBox(height: 16),
+                          const SizedBox(height: 16),
                           CustomTextForm(
                             keyboardType: TextInputType.number,
                             controller: provider.codeController,
@@ -216,8 +216,7 @@ class NewUser extends StatelessWidget {
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'El codigo es obligatorio';
-                              } else if (
-                                  value.length > 4) {
+                              } else if (value.length > 4) {
                                 return 'El codigo debe tener maximo 4 digitos';
                               }
                               return null;
