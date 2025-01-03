@@ -168,7 +168,7 @@ Widget logo(BuildContext context) {
       imgLogo(context, 0.3),
       Positioned(
           top: size * 0.19,
-          left: size2 * 0.028,
+          left: size2 * 0.036,
           right: 0,
           bottom: 0,
           child: CustomTextSpan(
@@ -176,8 +176,8 @@ Widget logo(BuildContext context) {
               secondary: colorScheme.primary,
               textPrimary: "Gana",
               textSecondary: "Gov",
-              sizePrimary: 20,
-              sizeSecondary: 20)),
+              sizePrimary: 18,
+              sizeSecondary: 18)),
     ],
   );
 }
