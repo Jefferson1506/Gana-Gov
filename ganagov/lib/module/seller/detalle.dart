@@ -140,68 +140,58 @@ class SaleCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DetailViewPage(sale: sale),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildImageGallery(),
+            const SizedBox(height: 10),
+            _buildTitle(),
+            const SizedBox(height: 5),
+            _buildDetails(),
+            const SizedBox(height: 5),
+            _buildIcons(),
+            const SizedBox(height: 5),
+            _buildNegotiableInfo(),
+            Center(
+              child: buildTextIconRow(
+                icon: Icons.tag_outlined,
+                text: 'Sexo - ${sale.sexo}',
+                color: Colors.grey,
+              ),
             ),
-          );
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildImageGallery(),
-              const SizedBox(height: 10),
-              _buildTitle(),
-              const SizedBox(height: 5),
-              _buildDetails(),
-              const SizedBox(height: 5),
-              _buildIcons(),
-              const SizedBox(height: 5),
-              _buildNegotiableInfo(),
-              Center(
-                child: buildTextIconRow(
-                  icon: Icons.tag_outlined,
-                  text: 'Sexo - ${sale.sexo}',
-                  color: Colors.grey,
-                ),
+            const SizedBox(height: 5),
+            Center(
+              child: buildTextIconRow(
+                icon: Icons.tag_outlined,
+                text: 'Vacunas al día - ${boolToYesNo(sale.vacuna)}',
+                color: sale.vacuna == true ? Colors.green : Colors.red,
               ),
-              const SizedBox(height: 5),
-              Center(
-                child: buildTextIconRow(
-                  icon: Icons.tag_outlined,
-                  text: 'Vacunas al día - ${boolToYesNo(sale.vacuna)}',
-                  color: sale.vacuna == true ? Colors.green : Colors.red,
-                ),
+            ),
+            const SizedBox(height: 5),
+            Center(
+              child: buildTextIconRow(
+                icon: Icons.price_change,
+                text: formatCurrency(double.tryParse(sale.precio) ?? 0),
+                color: Colors.grey,
               ),
-              const SizedBox(height: 5),
-              Center(
-                child: buildTextIconRow(
-                  icon: Icons.price_change,
-                  text: formatCurrency(double.tryParse(sale.precio) ?? 0),
-                  color: Colors.grey,
+            ),
+            const SizedBox(height: 10),
+            _buildDescription(),
+            const SizedBox(height: 20),
+            if (sale.videoUrl != null && sale.videoUrl.isNotEmpty)
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: VideoPlayerWidget(videoUrl: sale.videoUrl),
                 ),
-              ),
-              const SizedBox(height: 10),
-              _buildDescription(),
-              const SizedBox(height: 20),
-              if (sale.videoUrl != null && sale.videoUrl.isNotEmpty)
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: VideoPlayerWidget(videoUrl: sale.videoUrl),
-                  ),
-                )
-              else
-                const Text('No hay video disponible',
-                    style: TextStyle(color: Colors.grey)),
-            ],
-          ),
+              )
+            else
+              const Text('No hay video disponible',
+                  style: TextStyle(color: Colors.grey)),
+          ],
         ),
       ),
     );

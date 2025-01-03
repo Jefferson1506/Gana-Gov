@@ -4,6 +4,7 @@ import 'package:ganagov/global/user_model.dart';
 import 'package:ganagov/global/widgets/backgraound.dart';
 import 'package:ganagov/global/widgets/button.dart';
 import 'package:ganagov/module/login/page/login.dart';
+import 'package:ganagov/term.dart';
 import 'package:hive/hive.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -63,7 +64,18 @@ class HomeScreen extends StatelessWidget {
                 color: color.secondary,
                 onpress: () => Navigator.pushNamed(context, "home_seller"),
               ),
-        TextButton.icon(onPressed: (){}, label: AutoSizeText('Términos y condiciones de uso ',maxFontSize: 17,textAlign: TextAlign.center,style: TextStyle(color: Colors.lightBlueAccent,fontSize: 17),))
+              TextButton.icon(
+                  onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TerminosYCondicionesPage())),
+                  label: AutoSizeText(
+                    'Términos y condiciones de uso ',
+                    maxFontSize: 17,
+                    textAlign: TextAlign.center,
+                    style:
+                        TextStyle(color: Colors.lightBlueAccent, fontSize: 17),
+                  ))
             ],
           ),
         ],

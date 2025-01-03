@@ -56,7 +56,7 @@ class SaleCard extends StatelessWidget {
                   child: buildTextIconRow(
                     icon: Icons.tag_outlined,
                     text: 'Vacunas al día - ${boolToYesNo(sale.vacuna)}',
-                    color:sale.vacuna ==true? Colors.green: Colors.red,
+                    color: sale.vacuna == true ? Colors.green : Colors.red,
                   ),
                 ),
                 const SizedBox(height: 5),
