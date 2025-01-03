@@ -168,7 +168,7 @@ Widget logo(BuildContext context) {
       imgLogo(context, 0.3),
       Positioned(
           top: size * 0.19,
-          left: size2 * 0.036,
+          left: size2 * 0.035,
           right: 0,
           bottom: 0,
           child: CustomTextSpan(
