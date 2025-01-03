@@ -164,8 +164,8 @@ class _PerfilBuyerState extends State<PerfilBuyer> {
     return Scaffold(
       appBar: AppBar(
         shape: const UnderlineInputBorder(
-          borderSide: BorderSide(
-              color:  Color.fromARGB(255, 165,217,24), width: 5),
+          borderSide:
+              BorderSide(color: Color.fromARGB(255, 165, 217, 24), width: 5),
         ),
         toolbarHeight: MediaQuery.sizeOf(context).height * 0.1,
         title: const AutoSizeText(
@@ -295,8 +295,14 @@ class _PerfilBuyerState extends State<PerfilBuyer> {
                       controller: _usernameController,
                       hintText: 'Usuario',
                       prefixIcon: Icons.account_circle,
-                      validator: (value) =>
-                          value!.isEmpty ? 'El usuario es requerido' : null,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Por favor el campo es obligatorio';
+                        } else if (value.length < 8 || value.length > 16) {
+                          return 'Usuario invalida';
+                        }
+                        return null;
+                      },
                     ),
                     SizedBox(height: MediaQuery.sizeOf(context).height * 0.05),
                     CustomTextForm(
@@ -304,8 +310,14 @@ class _PerfilBuyerState extends State<PerfilBuyer> {
                       controller: _telefonoController,
                       hintText: 'Teléfono',
                       prefixIcon: Icons.phone,
-                      validator: (value) =>
-                          value!.isEmpty ? 'El teléfono es requerido' : null,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Por favor el campo es obligatorio';
+                        } else if (value.length < 10) {
+                          return 'Telefono invalido';
+                        }
+                        return null;
+                      },
                       keyboardType: TextInputType.phone,
                     ),
                     SizedBox(height: MediaQuery.sizeOf(context).height * 0.03),
@@ -313,10 +325,10 @@ class _PerfilBuyerState extends State<PerfilBuyer> {
                       padding: const EdgeInsets.all(40.0),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          
                           shape: const RoundedRectangleBorder(
-                            side: BorderSide(color: Colors.black),
-                            borderRadius: BorderRadius.all(Radius.circular(10))),
+                              side: BorderSide(color: Colors.black),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
                           backgroundColor:
                               const Color.fromARGB(255, 249, 188, 99),
                         ),
