@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.ganagov"
+    namespace = "com.example.ganagov"  
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 

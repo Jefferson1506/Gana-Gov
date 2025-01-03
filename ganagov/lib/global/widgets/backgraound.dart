@@ -6,7 +6,7 @@ Widget backgroundDay(BuildContext context) {
   return Stack(
     children: [
       Positioned(
-        bottom: height * -0.01,
+        bottom: height * -0.02,
         left: width * 0.35,
         child: Container(
           width: width * 0.3,
@@ -29,7 +29,12 @@ Widget backgroundDay(BuildContext context) {
         left: width * -0.15,
         child: CircleAvatar(
           radius: width * 0.2,
-          backgroundColor: const Color.fromARGB(255, 165,217,24,),
+          backgroundColor: const Color.fromARGB(
+            255,
+            165,
+            217,
+            24,
+          ),
         ),
       ),
       Positioned(
@@ -37,7 +42,12 @@ Widget backgroundDay(BuildContext context) {
         left: width * 0.13,
         child: CircleAvatar(
           radius: width * 0.2,
-          backgroundColor: const Color.fromARGB(255, 165,217,24,),
+          backgroundColor: const Color.fromARGB(
+            255,
+            165,
+            217,
+            24,
+          ),
         ),
       )
     ],
@@ -74,7 +84,12 @@ Widget backgroundAfternoon(BuildContext context) {
         left: width * -0.15,
         child: CircleAvatar(
           radius: width * 0.2,
-          backgroundColor: const Color.fromARGB(255, 165,217,24,),
+          backgroundColor: const Color.fromARGB(
+            255,
+            165,
+            217,
+            24,
+          ),
         ),
       ),
       Positioned(
@@ -82,7 +97,12 @@ Widget backgroundAfternoon(BuildContext context) {
         left: width * 0.13,
         child: CircleAvatar(
           radius: width * 0.2,
-          backgroundColor: const Color.fromARGB(255, 165,217,24,),
+          backgroundColor: const Color.fromARGB(
+            255,
+            165,
+            217,
+            24,
+          ),
         ),
       )
     ],
@@ -119,7 +139,12 @@ Widget backgroundNight(BuildContext context) {
         left: width * -0.15,
         child: CircleAvatar(
           radius: width * 0.2,
-          backgroundColor: const Color.fromARGB(255, 165,217,24,),
+          backgroundColor: const Color.fromARGB(
+            255,
+            165,
+            217,
+            24,
+          ),
         ),
       ),
       Positioned(
@@ -127,7 +152,12 @@ Widget backgroundNight(BuildContext context) {
         left: width * 0.13,
         child: CircleAvatar(
           radius: width * 0.2,
-          backgroundColor: const Color.fromARGB(255, 165,217,24,),
+          backgroundColor: const Color.fromARGB(
+            255,
+            165,
+            217,
+            24,
+          ),
         ),
       )
     ],

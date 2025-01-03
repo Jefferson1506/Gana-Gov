@@ -6,7 +6,7 @@ import 'package:ganagov/global/widgets/text_span.dart';
 import 'package:ganagov/module/buyer/page/list_sell.dart';
 import 'package:ganagov/module/seller/model_seller.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+//import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:video_player/video_player.dart';
 import 'package:intl/intl.dart';
 
@@ -124,7 +124,7 @@ Future<bool> _isWhatsappInstalled() async {
 }
 
 _callNumber(tel) async {
-  await FlutterPhoneDirectCaller.callNumber(tel);
+  await launch("tel:$tel");
 }
 
 class SaleCard extends StatelessWidget {

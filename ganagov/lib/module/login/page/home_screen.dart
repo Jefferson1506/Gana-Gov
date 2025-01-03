@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:ganagov/global/user_model.dart';
 import 'package:ganagov/global/widgets/backgraound.dart';
@@ -62,6 +63,7 @@ class HomeScreen extends StatelessWidget {
                 color: color.secondary,
                 onpress: () => Navigator.pushNamed(context, "home_seller"),
               ),
+        TextButton.icon(onPressed: (){}, label: AutoSizeText('Términos y condiciones de uso ',maxFontSize: 17,textAlign: TextAlign.center,style: TextStyle(color: Colors.lightBlueAccent,fontSize: 17),))
             ],
           ),
         ],
