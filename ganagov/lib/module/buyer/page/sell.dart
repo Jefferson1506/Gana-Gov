@@ -211,8 +211,8 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
             sizeSecondary: 23,
           ),
           shape: const UnderlineInputBorder(
-            borderSide: BorderSide(
-                color:  Color.fromARGB(255, 165,217,24), width: 5),
+            borderSide:
+                BorderSide(color: Color.fromARGB(255, 165, 217, 24), width: 5),
           ),
         ),
         body: ListView(children: [
@@ -403,6 +403,10 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
                     hintText: "Edad (meses)",
                     keyboardType: TextInputType.number,
                     validator: (value) {
+                      if (_tipoVentaSeleccionado.contains('Lote')) {
+                        _edadController.text = 'No definido';
+                      }
+
                       if (value!.isEmpty) {
                         return "Por favor ingrese la edad";
                       }
