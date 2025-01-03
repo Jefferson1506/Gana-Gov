@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 class SaleCard extends StatelessWidget {
   final Sale sale;
 
-  const SaleCard({Key? key, required this.sale}) : super(key: key);
+  const SaleCard({super.key, required this.sale});
 
   @override
   Widget build(BuildContext context) {

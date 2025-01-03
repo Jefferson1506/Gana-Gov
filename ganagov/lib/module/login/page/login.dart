@@ -72,7 +72,7 @@ class Login extends StatelessWidget {
                                 icon: provider.obscureText
                                     ? const Icon(Icons.visibility_off_outlined)
                                     : const Icon(Icons.visibility_outlined)),
-                            prefixIcon: Icon(Icons.lock_clock_sharp,
+                            prefixIcon: const Icon(Icons.lock_clock_sharp,
                                 color: Colors.black),
                             border: OutlineInputBorder(
                                 borderSide:

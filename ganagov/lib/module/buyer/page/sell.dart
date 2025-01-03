@@ -212,7 +212,7 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
           ),
           shape: const UnderlineInputBorder(
             borderSide: BorderSide(
-                color: const Color.fromARGB(255, 165,217,24), width: 5),
+                color:  Color.fromARGB(255, 165,217,24), width: 5),
           ),
         ),
         body: ListView(children: [

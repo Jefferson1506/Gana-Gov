@@ -18,8 +18,9 @@ class BreedProvider with ChangeNotifier {
           await FirebaseFirestore.instance.collection('Breeds').get();
       _breeds = snapshot.docs;
       notifyListeners();
+    // ignore: empty_catches
     } catch (e) {
-      print('Error fetching breeds: $e');
+    
     }
   }
 

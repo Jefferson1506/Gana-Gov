@@ -165,7 +165,7 @@ class _PerfilBuyerState extends State<PerfilBuyer> {
       appBar: AppBar(
         shape: const UnderlineInputBorder(
           borderSide: BorderSide(
-              color: const Color.fromARGB(255, 165,217,24), width: 5),
+              color:  Color.fromARGB(255, 165,217,24), width: 5),
         ),
         toolbarHeight: MediaQuery.sizeOf(context).height * 0.1,
         title: const AutoSizeText(

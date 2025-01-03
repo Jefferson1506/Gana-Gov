@@ -38,8 +38,8 @@ class _MySalesPageState extends State<MySalesPage> {
           sizeSecondary: 23,
         ),
         shape: const UnderlineInputBorder(
-          borderSide: BorderSide(
-              color: const Color.fromARGB(255, 165, 217, 24), width: 5),
+          borderSide:
+              BorderSide(color: Color.fromARGB(255, 165, 217, 24), width: 5),
         ),
       ),
       body: StreamBuilder(
