@@ -93,8 +93,8 @@ class RecoverPassword extends StatelessWidget {
                                 return null;
                               },
                             ),
-                              SizedBox(height: height * 0.02),
-                               CustomTextForm(
+                            SizedBox(height: height * 0.02),
+                            CustomTextForm(
                               controller: provider.code,
                               hintText: "Codigo de seguridad :",
                               keyboardType: TextInputType.emailAddress,
@@ -172,7 +172,7 @@ class RecoverPassword extends StatelessWidget {
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Por favor el campo es obligatorio';
-                                } else if (value.length < 4 ||
+                                } else if (value.length < 8 ||
                                     value.length > 16) {
                                   return 'Contraseña invalida';
                                 }
