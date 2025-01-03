@@ -161,15 +161,16 @@ class Login extends StatelessWidget {
 Widget logo(BuildContext context) {
   final colorScheme = Theme.of(context).colorScheme;
   final size = MediaQuery.sizeOf(context).height;
-
+  final size2 = MediaQuery.sizeOf(context).width;
   return Stack(
     alignment: Alignment.center,
     children: [
       imgLogo(context, 0.3),
       Positioned(
           top: size * 0.19,
-          left: 0,
+          left: size2 * 0.028,
           right: 0,
+          bottom: 0,
           child: CustomTextSpan(
               primary: const Color.fromARGB(255, 54, 54, 54),
               secondary: colorScheme.primary,
