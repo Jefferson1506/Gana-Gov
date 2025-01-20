@@ -42,7 +42,7 @@ class CustomTextSpan extends StatelessWidget {
         ),
         maxLines: 1,
         minFontSize: 18,
-        maxFontSize: 20,
+        maxFontSize: 19,
         overflow: TextOverflow.ellipsis,
       ),
     );

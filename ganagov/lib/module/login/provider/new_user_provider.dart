@@ -104,7 +104,7 @@ class UserProvider extends ChangeNotifier {
     selectedGender = null;
     emailController.clear();
     passwordController.clear();
-    codeController.clear;
+    codeController.clear();
     notifyListeners();
   }
 
