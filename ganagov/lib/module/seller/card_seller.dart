@@ -95,20 +95,19 @@ class SaleCard extends StatelessWidget {
         TextButton.icon(
             onPressed: () {},
             label: AutoSizeText(
+              maxLines: 16,
               '${sale.raza} ',
               style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15,
-                color: Colors.black87,
+                fontWeight: FontWeight.bold,                color: Colors.black87,
               ),
             )),
         TextButton.icon(
             onPressed: () {},
             icon: const Icon(Icons.location_on, color: Colors.black, size: 16),
             label: AutoSizeText(
+              maxLines: 16,
               '${sale.departamento} ',
               style: const TextStyle(
-                fontSize: 15,
                 color: Colors.grey,
               ),
             )),
@@ -117,9 +116,9 @@ class SaleCard extends StatelessWidget {
             icon:
                 const Icon(Icons.location_city, color: Colors.black, size: 16),
             label: AutoSizeText(
+              maxFontSize: 16,
               '${sale.municipio} ',
               style: const TextStyle(
-                fontSize: 15,
                 color: Colors.grey,
               ),
             )),

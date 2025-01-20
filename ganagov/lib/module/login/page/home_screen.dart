@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:ganagov/global/user_model.dart';
 import 'package:ganagov/global/widgets/backgraound.dart';
@@ -25,12 +24,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
+
     return Scaffold(
       body: Stack(
+        alignment: Alignment.center,
         children: [
           backgroundDay(context),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            
             children: [
               logo(context),
               CustomButton(
@@ -64,18 +66,10 @@ class HomeScreen extends StatelessWidget {
                 color: color.secondary,
                 onpress: () => Navigator.pushNamed(context, "home_seller"),
               ),
-              TextButton.icon(
-                  onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => TerminosYCondicionesPage())),
-                  label: AutoSizeText(
-                    'Términos y condiciones de uso ',
-                    maxFontSize: 17,
-                    textAlign: TextAlign.center,
-                    style:
-                        TextStyle(color: Colors.lightBlueAccent, fontSize: 17),
-                  ))
+                SizedBox(
+                height: MediaQuery.sizeOf(context).height * 0.02,
+              ),
+         TerminosYCondiciones()
             ],
           ),
         ],

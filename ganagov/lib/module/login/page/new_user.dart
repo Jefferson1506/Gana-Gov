@@ -102,7 +102,9 @@ class NewUser extends StatelessWidget {
                               value: provider.selectedIdType,
                               decoration: const InputDecoration(
                                 hintText: 'Tipo de identificación',
-                                border: OutlineInputBorder(),
+                                border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
                               ),
                               items: provider.idTypes.map((String type) {
                                 return DropdownMenuItem<String>(
@@ -155,7 +157,9 @@ class NewUser extends StatelessWidget {
                               value: provider.selectedGender,
                               decoration: const InputDecoration(
                                 hintText: 'Género',
-                                border: OutlineInputBorder(),
+                                border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
                               ),
                               items: provider.genders.map((String gender) {
                                 return DropdownMenuItem<String>(

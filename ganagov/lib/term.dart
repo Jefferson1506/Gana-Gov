@@ -121,3 +121,58 @@ class TerminosYCondicionesPage extends StatelessWidget {
     );
   }
 }
+
+class TerminosYCondiciones extends StatelessWidget {
+  const TerminosYCondiciones({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final padding = width * 0.05;
+
+    return GestureDetector(
+      onTap: () => Navigator.push(context,
+          MaterialPageRoute(builder: (context) => TerminosYCondicionesPage())),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: padding),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            AutoSizeText(
+              "Al continuar, aceptas nuestros",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 16, color: Colors.black),
+              maxLines: 1,
+            ),
+            RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                style: TextStyle(fontSize: 16, color: Colors.black),
+                children: [
+                  TextSpan(
+                    text: "términos y condiciones",
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      color: Colors.blue,
+                    ),
+                  ),
+                  TextSpan(
+                    text: " de uso y reconoces que entiendes la ",
+                  ),
+                  TextSpan(
+                    text: "política de seguridad",
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      color: Colors.blue,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
