@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ganagov/global/widgets/loanding.dart';
 import 'package:ganagov/global/widgets/notify_dialog.dart';
 import 'package:ganagov/global/widgets/text_span.dart';
 import 'package:ganagov/module/seller/card_seller.dart';

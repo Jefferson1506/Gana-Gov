@@ -12,7 +12,7 @@ class BreedCrudPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery.sizeOf(context);
 
     return ChangeNotifierProvider(
       create: (_) => BreedProvider(),
@@ -22,7 +22,7 @@ class BreedCrudPage extends StatelessWidget {
           padding: EdgeInsets.all(size.width * 0.05),
           child: Column(
             children: [
-              Expanded(child: BreedList(size: size)),
+              Expanded(flex: 1, child: BreedList(size: size)),
               SizedBox(height: size.height * 0.03),
               CrudActions(size: size),
             ],
@@ -43,7 +43,8 @@ class CrudActions extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         ElevatedButton(
-          style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+          style: ElevatedButton.styleFrom(
+              backgroundColor: const Color.fromARGB(255, 249, 188, 99)),
           onPressed: () {
             CrudDialogs.showAddBreedDialog(context, size);
           },

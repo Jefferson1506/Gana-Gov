@@ -61,36 +61,40 @@ class UserListWithFilter extends StatelessWidget {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ListTile(
-                          tileColor: user['Estado'] == 'SI'
-                              ? Colors.green
-                              : Colors.grey,
-                          textColor: Colors.white,
-                          shape: const RoundedRectangleBorder(
-                              side: BorderSide(
-                                  color: Color.fromARGB(255, 249, 188, 99),
-                                  width: 2.5),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20))),
-                          title: AutoSizeText(
-                            'Nombre :${user['nombre'] ?? '---'}  Usuario :${user['User']}',
-                            maxFontSize: 15,
-                          ),
-                          subtitle: AutoSizeText(
-                            'Correo:${user['correo']} - Estado:${user['Estado']} - Rol:${user['rol']}  ',
-                            maxFontSize: 15,
-                          ),
-                          trailing: provider.superAdmin == true
-                              ? IconButton(
-                                  icon: const Icon(Icons.delete,
-                                      color: Colors.red),
-                                  onPressed: () {
-                                    provider.deleteUser(user['id']);
-                                  },
-                                )
-                              : null,
-                          onTap: () =>
-                              _showUpdateDialog(context, provider, user),
-                        ),
+                            tileColor: user['Estado'] == 'SI'
+                                ? user['superAdmin'] == true
+                                    ? Colors.teal
+                                    : Colors.green
+                                : Colors.grey,
+                            textColor: Colors.white,
+                            shape: const RoundedRectangleBorder(
+                                side: BorderSide(
+                                    color: Color.fromARGB(255, 249, 188, 99),
+                                    width: 2.5),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20))),
+                            title: AutoSizeText(
+                              'Nombre :${user['nombre'] ?? '---'}  Usuario :${user['User']}',
+                              maxFontSize: 15,
+                            ),
+                            subtitle: AutoSizeText(
+                              'Correo:${user['correo']} - Estado:${user['Estado']} - Rol:${user['rol']}  ',
+                              maxFontSize: 15,
+                            ),
+                            trailing: provider.superAdmin == true
+                                ? IconButton(
+                                    icon: const Icon(Icons.delete,
+                                        color: Colors.red),
+                                    onPressed: () {
+                                      provider.deleteUser(user['id']);
+                                    },
+                                  )
+                                : null,
+                            onTap: () {
+                              if (user['superAdmin'] != true) {
+                                _showUpdateDialog(context, provider, user);
+                              }
+                            }),
                       );
                     },
                   );

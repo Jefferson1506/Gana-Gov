@@ -1,0 +1,2 @@
+/home/jefferson/Documentos/Github/Gana-Gov/ganagov/android/app/.cxx/Debug/6v4d1k6c/x86/CMakeFiles/edit_cache.dir
+/home/jefferson/Documentos/Github/Gana-Gov/ganagov/android/app/.cxx/Debug/6v4d1k6c/x86/CMakeFiles/rebuild_cache.dir

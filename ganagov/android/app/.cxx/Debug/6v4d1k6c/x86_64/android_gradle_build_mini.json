@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/home/jefferson/Documentos/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/home/jefferson/Android/Sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/home/jefferson/Documentos/Github/Gana-Gov/ganagov/android/app/.cxx/Debug/6v4d1k6c/x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/home/jefferson/Android/Sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/home/jefferson/Documentos/Github/Gana-Gov/ganagov/android/app/.cxx/Debug/6v4d1k6c/x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}

@@ -62,13 +62,13 @@ class _AdminHomePageState extends State<AdminHomePage> {
               onPressed: () => logout(context),
               icon: const Icon(
                 Icons.people,
-                color: Colors.cyanAccent,
+                color: Colors.redAccent,
               )),
           IconButton(
               onPressed: () => exitApp(),
               icon: const Icon(
                 Icons.exit_to_app,
-                color: Colors.orange,
+                color: Colors.orangeAccent,
               ))
         ],
         title: const AutoSizeText(
