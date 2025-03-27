@@ -24,7 +24,7 @@ class StatisticsPage extends StatelessWidget {
                 if (snapshot.hasError) {
                   return Text("Error: ${snapshot.error}");
                 }
-                return _crearTarjeta('Número Total de Usuarios',
+                return _crearTarjeta('Número Total De Usuarios',
                     '${snapshot.data?.docs.length}');
               },
             ),
@@ -38,7 +38,7 @@ class StatisticsPage extends StatelessWidget {
                   return Text("Error: ${snapshot.error}");
                 }
                 return _crearTarjeta(
-                    'Número Total de Ventas', '${snapshot.data?.docs.length}');
+                    'Número Total De Publicaciones', '${snapshot.data?.docs.length}');
               },
             ),
             _crearGraficoVentas(),
@@ -81,13 +81,13 @@ class StatisticsPage extends StatelessWidget {
 
           return SfCartesianChart(
             title: const ChartTitle(
-                text: 'Total de Ventas',
+                text: 'Total De Publicaciones',
                 textStyle: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
             primaryXAxis: const CategoryAxis(),
             series: <CartesianSeries>[
               ColumnSeries<dynamic, String>(
                 dataSource: [
-                  {'category': 'Total Ventas', 'value': totalVentas}
+                  {'category': 'Total : $totalVentas', 'value': totalVentas}
                 ],
                 xValueMapper: (data, _) => data['category'],
                 yValueMapper: (data, _) => data['value'],
@@ -169,13 +169,24 @@ class StatisticsPage extends StatelessWidget {
           double precioPromedio =
               conteoVentas > 0 ? totalPrecio / conteoVentas : 0;
 
+          final List<Color> chartColors = [
+            Colors.indigo,
+            Colors.purple,
+            Colors.yellow,
+            Colors.blue,
+            Colors.red,
+            Colors.green,
+            Colors.orange,
+            Colors.pink,
+            Colors.cyan,
+            Colors.teal,
+          ];
+
           return SfCartesianChart(
-            palette: const [
-              Color(0xFF98FF98),
-            ],
             title: const ChartTitle(
-                text: 'Precio Promedio de Ventas Global',
-                textStyle: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
+              text: 'Precio Promedio De Publicaciones',
+              textStyle: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+            ),
             primaryXAxis: const CategoryAxis(),
             series: <CartesianSeries>[
               ColumnSeries<dynamic, String>(
@@ -185,6 +196,8 @@ class StatisticsPage extends StatelessWidget {
                 xValueMapper: (data, _) => data['category'],
                 yValueMapper: (data, _) => data['value'],
                 name: 'Precio Promedio',
+                pointColorMapper: (data, index) =>
+                    chartColors[index],
               ),
             ],
           );
@@ -213,12 +226,21 @@ class StatisticsPage extends StatelessWidget {
             razasVendidas[raza] = (razasVendidas[raza] ?? 0) + 1;
           }
 
+          final palette = [
+            Color(0xFFFFD1DC),
+            Color(0xFFFFE4B5),
+            Color(0xFFB39DDB),
+            Color(0xFFA7C7E7),
+            Color(0xFFFAE7B5),
+            Color(0xFFC1E1C1),
+            Color(0xFFFFCCCB),
+            Color(0xFFD8BFD8),
+            Color(0xFFF4A460),
+            Color(0xFF98FB98),
+          ];
           return SfCartesianChart(
-            palette: const [
-              Colors.pinkAccent,
-            ],
             title: const ChartTitle(
-                text: 'Razas Más Vendidas',
+                text: 'Razas Más Publicadas',
                 textStyle: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
             primaryXAxis: const CategoryAxis(),
             series: <CartesianSeries>[
@@ -227,6 +249,8 @@ class StatisticsPage extends StatelessWidget {
                 xValueMapper: (MapEntry<String, int> data, _) => data.key,
                 yValueMapper: (MapEntry<String, int> data, _) => data.value,
                 name: 'Ventas',
+                pointColorMapper: (data, index) =>
+                    palette[index],
               ),
             ],
           );
@@ -256,12 +280,22 @@ class StatisticsPage extends StatelessWidget {
                 (ventasPorDepartamento[departamento] ?? 0) + 1;
           }
 
+          final palette =
+          [
+            Color(0xFFFF073A),
+            Color(0xFF00FF00),
+            Color(0xFF1E90FF),
+            Color(0xFFFFFF00),
+            Color(0xFFFF1493),
+            Color(0xFF8A2BE2),
+            Color(0xFF00FFFF),
+            Color(0xFFFFA500),
+            Color(0xFFADFF2F),
+          ];
+
           return SfCartesianChart(
-            palette: const [
-              Colors.teal,
-            ],
             title: const ChartTitle(
-                text: 'Ventas por Departamento',
+                text: 'Publicaciones por Departamento',
                 textStyle: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
             primaryXAxis: const CategoryAxis(),
             series: <CartesianSeries>[
@@ -270,6 +304,8 @@ class StatisticsPage extends StatelessWidget {
                 xValueMapper: (MapEntry<String, int> data, _) => data.key,
                 yValueMapper: (MapEntry<String, int> data, _) => data.value,
                 name: 'Ventas',
+                pointColorMapper: (data, index) =>
+                    palette[index],
               ),
             ],
           );
