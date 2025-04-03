@@ -1,0 +1,2 @@
+/home/tripis/Documentos/GitHub/Gana-Gov/ganagov/android/app/.cxx/Debug/5s64182d/x86_64/CMakeFiles/edit_cache.dir
+/home/tripis/Documentos/GitHub/Gana-Gov/ganagov/android/app/.cxx/Debug/5s64182d/x86_64/CMakeFiles/rebuild_cache.dir

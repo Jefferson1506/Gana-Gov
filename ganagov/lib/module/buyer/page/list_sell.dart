@@ -75,8 +75,11 @@ class _MySalesPageState extends State<MySalesPage> {
                       Text('Fecha: ${venta['fecha']}',
                           style: const TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold)),
-                      // ignore: prefer_interpolation_to_compose_strings
-                      Text('Sexo:  ' + venta['sexo'],
+                               Text('Tipo de publicacion: ${venta['tipoVenta']}',
+                          style: const TextStyle(fontSize: 16)),
+                      Text('Raza: ${venta['raza']}',
+                          style: const TextStyle(fontSize: 16)),
+                      Text('Sexo: ${venta['sexo']}',
                           style: const TextStyle(fontSize: 16)),
                       Text('Cantidad: ${venta['cantidad']}',
                           style: const TextStyle(
@@ -88,7 +91,10 @@ class _MySalesPageState extends State<MySalesPage> {
                           style: const TextStyle(fontSize: 16)),
                       Text('Municipio: ${venta['municipio'] ?? ''}',
                           style: const TextStyle(fontSize: 16)),
-                      Text('Edad: ${venta['edad']}',
+                      Text('Edad: ${venta['edad']} ${venta['edad'].toString().contains('desconicido') ? '.' : venta['edad'].toString().contains('1')?'Mes':'Meses'}',
+                          style: const TextStyle(fontSize: 16)),
+                      Text(
+                          'Clasificacion: ${determinarTipoAnimal(venta['sexo'], venta['edad'])}',
                           style: const TextStyle(fontSize: 16)),
                       Text('Peso: ${venta['peso']}',
                           style: const TextStyle(fontSize: 16)),
@@ -99,14 +105,12 @@ class _MySalesPageState extends State<MySalesPage> {
                               color: venta['negociable'] == true
                                   ? Colors.green
                                   : Colors.red)),
-
                       Text('Vacuna: ${boolToYesNo(venta['vacuna'] ?? false)}',
                           style: TextStyle(
                               fontSize: 16,
                               color: venta['vacuna'] == true
                                   ? Colors.green
                                   : Colors.red)),
-
                       Text('Descripción: ${venta['descripcion']}',
                           style: const TextStyle(fontSize: 16)),
                       Text('Estado: ${venta['estado']}',
@@ -181,4 +185,47 @@ String formatCurrency(double amount) {
 
 String boolToYesNo(bool value) {
   return value ? 'Sí' : 'No';
+}
+
+String determinarTipoAnimal(String? sexo, String? mesesStr) {
+  if (sexo == null || sexo.isEmpty) {
+    if (mesesStr == null || mesesStr.isEmpty) {
+      return "Información insuficiente para clasificar el animal.";
+    }
+    return "No se puede determinar la categoría sin el sexo.";
+  }
+
+  sexo = sexo.toLowerCase();
+
+  if (sexo == "mixto") {
+    return "El lote contiene animales de ambos sexos.";
+  }
+
+  if (mesesStr == null || mesesStr.isEmpty) {
+    return "No se proporcionó la edad, no se puede determinar la clasificacion.";
+  }
+
+  int meses = int.tryParse(mesesStr) ?? -1;
+
+  if (meses < 0) {
+    return "La edad en meses no es válida.";
+  }
+
+  if (sexo == "macho") {
+    if (meses <= 12) {
+      return "Ternero";
+    } else if (meses <= 36) {
+      return "Novillo";
+    } else {
+      return "Toro";
+    }
+  } else if (sexo == "hembra") {
+    if (meses <= 12) {
+      return "Ternera";
+    } else {
+      return "Vaca";
+    }
+  } else {
+    return "Desconocido.";
+  }
 }

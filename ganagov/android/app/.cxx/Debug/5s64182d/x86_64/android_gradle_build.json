@@ -1,0 +1,28 @@
+{
+  "buildFiles": [
+    "/home/tripis/Documentos/flutter-sdk/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/home/tripis/Android/Sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/home/tripis/Documentos/GitHub/Gana-Gov/ganagov/android/app/.cxx/Debug/5s64182d/x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/home/tripis/Android/Sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/home/tripis/Documentos/GitHub/Gana-Gov/ganagov/android/app/.cxx/Debug/5s64182d/x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {},
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "/home/tripis/Android/Sdk/ndk/26.3.11579264/toolchains/llvm/prebuilt/linux-x86_64/bin/clang.lld",
+      "cppCompilerExecutable": "/home/tripis/Android/Sdk/ndk/26.3.11579264/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++.lld"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": []
+}
