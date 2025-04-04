@@ -32,18 +32,14 @@ class SaleCard extends StatelessWidget {
           padding: const EdgeInsets.all(12.0),
           child: SingleChildScrollView(
             child: Column(
+              spacing: 15,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildImage(),
-                const SizedBox(height: 10),
                 _buildTitle(),
-                const SizedBox(height: 5),
                 _buildDetails(),
-                const SizedBox(height: 5),
                 _buildIcons(),
-                const SizedBox(height: 5),
                 _buildNegotiableInfo(),
-                const SizedBox(height: 5),
                 Center(
                   child: buildTextIconRow(
                     icon: Icons.tag_outlined,
@@ -51,7 +47,6 @@ class SaleCard extends StatelessWidget {
                     color: Colors.grey,
                   ),
                 ),
-                const SizedBox(height: 5),
                 Center(
                   child: buildTextIconRow(
                     icon: Icons.tag_outlined,
@@ -59,12 +54,23 @@ class SaleCard extends StatelessWidget {
                     color: sale.vacuna == true ? Colors.green : Colors.red,
                   ),
                 ),
-                const SizedBox(height: 5),
                 Center(
                   child: buildTextIconRow(
                     icon: Icons.price_change,
                     text: formatCurrency(double.tryParse(sale.precio) ?? 0),
                     color: Colors.grey,
+                  ),
+                ),
+                TextButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(Icons.calendar_month,
+                      color: Colors.black, size: 16),
+                  label: AutoSizeText(
+                    'Fecha de publicacion: ${dateTime(sale.fecha)}',
+                    style: const TextStyle(
+                      fontSize: 15,
+                      color: Colors.grey,
+                    ),
                   ),
                 ),
               ],
@@ -92,23 +98,14 @@ class SaleCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-          TextButton.icon(
-            onPressed: () {},
-            label: AutoSizeText(
-              maxLines: 16,
-              '${sale.fecha} ',
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
-            )),
         TextButton.icon(
             onPressed: () {},
             label: AutoSizeText(
               maxLines: 16,
               '${sale.raza} ',
               style: const TextStyle(
-                fontWeight: FontWeight.bold,                color: Colors.black87,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
               ),
             )),
         TextButton.icon(
@@ -236,4 +233,11 @@ String formatCurrency(double amount) {
     decimalDigits: 0,
   );
   return formatter.format(amount);
+}
+
+String dateTime(String date) {
+  final value = DateTime.parse(date);
+  final form = DateFormat.yMMMEd('es');
+
+  return form.format(value).toString();
 }

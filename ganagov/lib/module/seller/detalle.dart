@@ -4,6 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:ganagov/global/widgets/text_span.dart';
 import 'package:ganagov/module/buyer/page/list_sell.dart';
+import 'package:ganagov/module/seller/card_seller.dart';
 import 'package:ganagov/module/seller/model_seller.dart';
 import 'package:url_launcher/url_launcher.dart';
 //import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
@@ -143,16 +144,13 @@ class SaleCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
+          spacing: 7,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildImageGallery(),
-            const SizedBox(height: 10),
             _buildTitle(),
-            const SizedBox(height: 5),
             _buildDetails(),
-            const SizedBox(height: 5),
             _buildIcons(),
-            const SizedBox(height: 5),
             _buildNegotiableInfo(),
             Center(
               child: buildTextIconRow(
@@ -161,7 +159,6 @@ class SaleCard extends StatelessWidget {
                 color: Colors.grey,
               ),
             ),
-            const SizedBox(height: 5),
             Center(
               child: buildTextIconRow(
                 icon: Icons.tag_outlined,
@@ -169,7 +166,6 @@ class SaleCard extends StatelessWidget {
                 color: sale.vacuna == true ? Colors.green : Colors.red,
               ),
             ),
-            const SizedBox(height: 5),
             Center(
               child: buildTextIconRow(
                 icon: Icons.price_change,
@@ -177,9 +173,19 @@ class SaleCard extends StatelessWidget {
                 color: Colors.grey,
               ),
             ),
-            const SizedBox(height: 10),
+            TextButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.calendar_month,
+                  color: Colors.black, size: 16),
+              label: AutoSizeText(
+                'Fecha de publicacion: ${dateTime(sale.fecha)}',
+                style: const TextStyle(
+                  fontSize: 15,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
             _buildDescription(),
-            const SizedBox(height: 20),
             if (sale.videoUrl != null && sale.videoUrl.isNotEmpty)
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10),
