@@ -32,10 +32,10 @@ class _MySalesPageState extends State<MySalesPage> {
         title: CustomTextSpan(
           primary: const Color.fromARGB(255, 54, 54, 54),
           secondary: colorScheme.primary,
-          textPrimary: "Mis Publicaciones                                      Gana",
+          textPrimary: "Mis Publicaciones    Gana",
           textSecondary: "Gov",
-          sizePrimary: 23,
-          sizeSecondary: 23,
+          sizePrimary: 25,
+          sizeSecondary: 25,
         ),
         shape: const UnderlineInputBorder(
           borderSide:

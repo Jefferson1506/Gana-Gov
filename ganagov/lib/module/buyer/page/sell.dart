@@ -205,10 +205,10 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
           title: CustomTextSpan(
             primary: const Color.fromARGB(255, 54, 54, 54),
             secondary: colorScheme.primary,
-            textPrimary:"Registro de Ganado                                    Gana",
+            textPrimary: "Registro de Ganado    Gana",
             textSecondary: "Gov",
-            sizePrimary: 23,
-            sizeSecondary: 23,
+            sizePrimary: 25,
+            sizeSecondary: 25,
           ),
           shape: const UnderlineInputBorder(
             borderSide:

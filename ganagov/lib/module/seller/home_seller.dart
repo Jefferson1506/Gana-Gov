@@ -123,7 +123,7 @@ class _SalesViewState extends State<SalesView> {
         title: CustomTextSpan(
           primary: const Color.fromARGB(255, 54, 54, 54),
           secondary: colorScheme.primary,
-          textPrimary: "Ventas de Ganado                       Gana",
+          textPrimary: "Ventas de Ganado    Gana",
           textSecondary: "Gov",
           sizePrimary: 23,
           sizeSecondary: 23,
