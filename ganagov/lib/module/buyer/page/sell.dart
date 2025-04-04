@@ -201,11 +201,11 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: height * 0.1,
-          centerTitle: true,
+          centerTitle: false,
           title: CustomTextSpan(
             primary: const Color.fromARGB(255, 54, 54, 54),
             secondary: colorScheme.primary,
-            textPrimary: "Registro de Ganado     Gana",
+            textPrimary:"Registro de Ganado                                    Gana",
             textSecondary: "Gov",
             sizePrimary: 23,
             sizeSecondary: 23,

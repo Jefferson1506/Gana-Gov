@@ -117,12 +117,13 @@ class _SalesViewState extends State<SalesView> {
 
     return Scaffold(
       appBar: AppBar(
+        
         toolbarHeight: height * 0.1,
         centerTitle: true,
         title: CustomTextSpan(
           primary: const Color.fromARGB(255, 54, 54, 54),
           secondary: colorScheme.primary,
-          textPrimary: "Ventas de Ganado     Gana",
+          textPrimary: "Ventas de Ganado                       Gana",
           textSecondary: "Gov",
           sizePrimary: 23,
           sizeSecondary: 23,

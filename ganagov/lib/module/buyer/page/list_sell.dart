@@ -28,11 +28,11 @@ class _MySalesPageState extends State<MySalesPage> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: height * 0.1,
-        centerTitle: true,
+        centerTitle: false,
         title: CustomTextSpan(
           primary: const Color.fromARGB(255, 54, 54, 54),
           secondary: colorScheme.primary,
-          textPrimary: "Mis Publicaciones    Gana",
+          textPrimary: "Mis Publicaciones                                      Gana",
           textSecondary: "Gov",
           sizePrimary: 23,
           sizeSecondary: 23,
