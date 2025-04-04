@@ -33,7 +33,7 @@ class _HomeBuyerState extends State<HomeBuyer> {
           ),
           TabItem(
             icon: Icons.sell,
-            title: 'Vender',
+            title: 'Publicar',
           ),
           TabItem(
             icon: Icons.list,

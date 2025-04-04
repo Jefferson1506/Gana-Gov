@@ -514,7 +514,7 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
                   TextButton.icon(
                     onPressed: _pickImages,
                     icon: const Icon(Icons.image),
-                    label: const Text('Seleccionar imágenes'),
+                    label: const Text('Seleccionar imágenes - Max 3'),
                   ),
                   _images.isNotEmpty
                       ? Wrap(
@@ -534,7 +534,7 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
                   TextButton.icon(
                     onPressed: _pickVideo,
                     icon: const Icon(Icons.video_collection),
-                    label: const Text('Seleccionar video'),
+                    label: const Text('Seleccionar video - Max 30 Segundo'),
                   ),
                   _video != null
                       ? Text(
