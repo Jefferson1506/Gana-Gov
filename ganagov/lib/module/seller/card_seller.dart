@@ -92,6 +92,16 @@ class SaleCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+          TextButton.icon(
+            onPressed: () {},
+            label: AutoSizeText(
+              maxLines: 16,
+              '${sale.fecha} ',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            )),
         TextButton.icon(
             onPressed: () {},
             label: AutoSizeText(

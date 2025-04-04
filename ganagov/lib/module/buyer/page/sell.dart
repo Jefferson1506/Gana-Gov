@@ -416,7 +416,7 @@ class _RegistroGanadoPageState extends State<RegistroGanadoPage> {
                   SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
                   CustomTextForm(
                     controller: _precioController,
-                    hintText: "Precio",
+                    hintText: "Precio (Sin punto y sin coma)",
                     keyboardType: TextInputType.number,
                     validator: (value) {
                       if (value!.isEmpty) {
